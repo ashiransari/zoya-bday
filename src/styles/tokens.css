@@ -240,6 +240,34 @@ button {
     );
 }
 
+.reason-card-final::after {
+  position: absolute;
+  inset: -35% auto -35% -50%;
+  width: 34%;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.2),
+    transparent
+  );
+  transform: skewX(-18deg);
+  animation: reason-shimmer var(--reason-shimmer-duration) ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes reason-shimmer {
+  0%,
+  22% {
+    left: -50%;
+  }
+
+  72%,
+  100% {
+    left: 125%;
+  }
+}
+
 @keyframes heart-fill {
   0% {
     clip-path: inset(100% 0 0);

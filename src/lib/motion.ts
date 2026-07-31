@@ -45,6 +45,11 @@ export const LOCK_TIMING = {
   pulse: 4,
 } as const;
 
+export const REASONS_TIMING = {
+  shimmer: 3,
+  reducedFade: 0.2,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
