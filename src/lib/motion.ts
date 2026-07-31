@@ -34,6 +34,17 @@ export const GIFT_TIMING = {
   reducedFade: 0.2,
 } as const;
 
+export const LOADING_TIMING = {
+  minimumMs: 800,
+  fade: 0.3,
+  heartPulse: 1.2,
+} as const;
+
+export const LOCK_TIMING = {
+  tickMs: 250,
+  pulse: 4,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;

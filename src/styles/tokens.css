@@ -48,6 +48,51 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+.loading-heart {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 72px;
+  font-family: Georgia, serif;
+  font-size: 72px;
+  line-height: 1;
+}
+
+.loading-heart-outline,
+.loading-heart-fill {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.loading-heart-outline {
+  z-index: 1;
+  color: var(--cherry);
+}
+
+.loading-heart-fill {
+  color: var(--cherry-bright);
+  clip-path: inset(100% 0 0);
+  animation: heart-fill var(--heart-fill-duration) ease-in-out infinite;
+}
+
+.loading-heart-reduced .loading-heart-fill {
+  clip-path: inset(0);
+  animation: none;
+}
+
+@keyframes heart-fill {
+  0% {
+    clip-path: inset(100% 0 0);
+  }
+
+  70%,
+  100% {
+    clip-path: inset(0);
+  }
+}
+
 .gift-gingham {
   background-color: var(--cherry);
   background-image:
