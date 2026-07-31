@@ -79,15 +79,31 @@ export function S9_Finale() {
           >
             <motion.span
               className="finale-gift-inner"
-              animate={{ rotateY: giftFlipped ? 180 : 0 }}
-              transition={{ duration: DUR.flip, ease: EASE.inOut }}
+              animate={
+                reducedMotion
+                  ? { opacity: 1 }
+                  : { rotateY: giftFlipped ? 180 : 0 }
+              }
+              transition={
+                reducedMotion
+                  ? { duration: FINALE_TIMING.reducedFade }
+                  : { duration: DUR.flip, ease: EASE.inOut }
+              }
             >
-              <span className="finale-gift-face finale-gift-front">
-                one more thing… 🎁
-              </span>
-              <span className="finale-gift-face finale-gift-back">
-                {giftClue.riddle}
-              </span>
+              {reducedMotion ? (
+                <span className="finale-gift-face finale-gift-front">
+                  {giftFlipped ? giftClue.riddle : "one more thing… 🎁"}
+                </span>
+              ) : (
+                <>
+                  <span className="finale-gift-face finale-gift-front">
+                    one more thing… 🎁
+                  </span>
+                  <span className="finale-gift-face finale-gift-back">
+                    {giftClue.riddle}
+                  </span>
+                </>
+              )}
             </motion.span>
           </button>
         )}

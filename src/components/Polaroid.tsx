@@ -74,6 +74,8 @@ export function Polaroid({
                   className="absolute inset-0 h-full w-full object-cover"
                   src={src}
                   alt={alt}
+                  width="1200"
+                  height="900"
                   loading="lazy"
                   decoding="async"
                   onError={() => setImageFailed(true)}

@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
 import { MusicToggle } from "./components/MusicToggle";
 import { content } from "./content";
+import { EasterEggs } from "./effects/EasterEggs";
 import { Grain } from "./effects/Grain";
+import { HeartCursor } from "./effects/HeartCursor";
+import { TabTitle } from "./effects/TabTitle";
 import { AppCtx } from "./lib/AppCtx";
 import { S0_Loading } from "./scenes/S0_Loading";
 import { S1_MidnightLock } from "./scenes/S1_MidnightLock";
@@ -58,6 +61,13 @@ function App() {
       <main className="relative isolate min-h-[100dvh] overflow-hidden bg-paper text-ink">
         <Grain />
         <MusicToggle />
+        {giftOpened ? (
+          <>
+            <TabTitle />
+            <HeartCursor />
+            <EasterEggs />
+          </>
+        ) : null}
         {activeScene}
       </main>
     </AppCtx.Provider>

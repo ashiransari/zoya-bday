@@ -40,7 +40,7 @@ export function S2_GiftBox() {
     }
 
     const celebrationTimer = window.setTimeout(() => {
-      micro(confettiOrigin.current);
+      if (!reducedMotion) micro(confettiOrigin.current);
     }, GIFT_TIMING.celebration * 1_000);
 
     const revealTimer = window.setTimeout(() => {
@@ -74,7 +74,10 @@ export function S2_GiftBox() {
   const fadeOnly = reducedMotion ? { opacity: 0 } : undefined;
 
   return (
-    <section className="relative isolate flex min-h-[100dvh] items-center justify-center overflow-hidden px-5 py-12">
+    <section
+      id="gift"
+      className="relative isolate flex min-h-[100dvh] items-center justify-center overflow-hidden px-5 py-12"
+    >
       <div
         aria-hidden="true"
         className="absolute left-1/2 top-1/2 h-[70vw] max-h-[460px] w-[70vw] max-w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blush/30 blur-3xl"

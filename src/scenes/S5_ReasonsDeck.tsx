@@ -154,15 +154,19 @@ export function S5_ReasonsDeck() {
                         scale: 0.94,
                       }
                 }
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  rotate: isFinalCard
-                    ? 0
-                    : seededRotation(`reason-${revealedIndex}`, 2),
-                  scale: isFinalCard ? 1.08 : 1,
-                }}
+                animate={
+                  reducedMotion
+                    ? { opacity: 1 }
+                    : {
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        rotate: isFinalCard
+                          ? 0
+                          : seededRotation(`reason-${revealedIndex}`, 2),
+                        scale: isFinalCard ? 1.08 : 1,
+                      }
+                }
                 exit={
                   reducedMotion
                     ? { opacity: 0 }

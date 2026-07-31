@@ -74,7 +74,7 @@ export function S8_Letter() {
   const openedRef = useRef(false);
   const timersRef = useRef<number[]>([]);
   const initial = content.her.name.trim().charAt(0).toUpperCase() || "♥";
-  const rotation = seededRotation("the-letter", 1.8);
+  const rotation = reducedMotion ? 0 : seededRotation("the-letter", 1.8);
 
   useEffect(
     () => () => {

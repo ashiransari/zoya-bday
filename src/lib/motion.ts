@@ -78,6 +78,14 @@ export const FINALE_TIMING = {
   reducedFade: 0.2,
 } as const;
 
+export const EASTER_EGG_TIMING = {
+  heartRain: 4,
+  tapHeart: 0.9,
+  modal: 0.2,
+  sparkleLifeMs: 650,
+  sparkleThrottleMs: 40,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;

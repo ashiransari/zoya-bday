@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Polaroid } from "../components/Polaroid";
 import { Section } from "../components/Section";
 import { content, type Chapter } from "../content";
+import { TEDDY_TAP_EVENT } from "../effects/EasterEggs";
+import { useAppCtx } from "../lib/AppCtx";
 import { reducedMotion } from "../lib/motion";
 import { seededRotation } from "../lib/seededRandom";
 
@@ -90,6 +92,8 @@ function ArtifactImage({
             className="absolute inset-0 h-full w-full object-cover"
             src={artifact.src}
             alt={artifact.label ?? `Artifact from ${chapter.title}`}
+            width="1200"
+            height="900"
             loading="lazy"
             decoding="async"
             onError={() => setImageFailed(true)}
@@ -132,6 +136,8 @@ function ArtifactNote({ chapter }: { chapter: Chapter }) {
 }
 
 export function S3_StoryOfHer() {
+  const { giftOpened } = useAppCtx();
+
   return (
     <section
       id="story-of-her"
@@ -214,16 +220,20 @@ export function S3_StoryOfHer() {
         })}
 
         <Section className="relative z-10 mt-20 flex justify-center md:mt-28">
-          <span
-            className="inline-block text-5xl"
+          <button
+            type="button"
+            className="teddy-easter-button"
             style={{
               transform: `rotate(${seededRotation("story-teddy")}deg)`,
             }}
-            role="img"
-            aria-label="A tiny teddy bear"
+            aria-label="Tap the tiny teddy bear"
+            disabled={!giftOpened}
+            onClick={() => window.dispatchEvent(new Event(TEDDY_TAP_EVENT))}
           >
-            🧸
-          </span>
+            <span role="img" aria-hidden="true">
+              🧸
+            </span>
+          </button>
         </Section>
       </div>
     </section>
