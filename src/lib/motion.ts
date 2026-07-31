@@ -55,6 +55,16 @@ export const OPEN_WHEN_TIMING = {
   reducedFade: 0.2,
 } as const;
 
+export const CAKE_TIMING = {
+  flameOut: 0.18,
+  smoke: 0.3,
+  blackout: 0.4,
+  fallbackDelayMs: 6_000,
+  fallbackTaps: 3,
+  flicker: 0.6,
+  reducedFade: 0.2,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
