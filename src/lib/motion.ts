@@ -25,6 +25,15 @@ export const EASE = {
 
 export const STAGGER = { children: 0.08 } as const;
 
+export const GIFT_TIMING = {
+  celebration: 0.5,
+  heroReveal: DUR.ribbonUntie + DUR.lidLift + DUR.boxFade,
+  scrollHint: 2,
+  scrollBounce: 1.6,
+  balloonDrift: 3,
+  reducedFade: 0.2,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
