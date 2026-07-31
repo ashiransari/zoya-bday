@@ -50,6 +50,11 @@ export const REASONS_TIMING = {
   reducedFade: 0.2,
 } as const;
 
+export const OPEN_WHEN_TIMING = {
+  sealBreak: 0.2,
+  reducedFade: 0.2,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
