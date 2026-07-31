@@ -26,14 +26,14 @@ export interface OpenWhenLetter {
 
 export const content = {
   her: {
-    name: "HerName",
-    nickname: "nickname",
-    turningAge: 26,
-    birthdayISO: "2026-08-06T00:00:00+05:30",
+    name: "Zoya",
+    nickname: "Baby",
+    turningAge: 23,
+    birthdayISO: "2026-08-27T00:00:00+05:30",
   },
-  you: { name: "YourName", signOff: "Forever yours," },
+  you: { name: "Ashir", signOff: "Your Husband" },
   us: {
-    startedISO: "2022-01-01T00:00:00+05:30",
+    startedISO: "2025-02-28T00:00:00+05:30",
     counterLabel: "loving you for",
     cantWaitFor: ["the first dance", "every ordinary Tuesday", "that trip we keep talking about"],
   },
@@ -103,7 +103,7 @@ export const content = {
   giftClue: undefined as { riddle: string } | undefined,
 
   finale: {
-    line1: "Happy birthday, nickname.",
+    line1: "Happy birthday, Baby.",
     line2: "I love you. Today, tomorrow, always.",
   },
 
