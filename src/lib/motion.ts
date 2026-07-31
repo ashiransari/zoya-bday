@@ -65,6 +65,19 @@ export const CAKE_TIMING = {
   reducedFade: 0.2,
 } as const;
 
+export const LETTER_TIMING = {
+  paperReveal: DUR.sealCrack + DUR.flapOpen + DUR.sheetRise,
+  typewriterStart: DUR.sealCrack + DUR.flapOpen + DUR.sheetRise + 0.4,
+  cursorBlink: 1,
+  reducedFade: 0.2,
+} as const;
+
+export const FINALE_TIMING = {
+  lineStagger: 0.5,
+  heartRain: 6,
+  reducedFade: 0.2,
+} as const;
+
 export const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;

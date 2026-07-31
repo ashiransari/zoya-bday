@@ -633,6 +633,514 @@ button {
   }
 }
 
+.letter-scene {
+  position: relative;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 72px 10px;
+  background:
+    radial-gradient(circle at 50% 10%, rgb(255 255 255 / 0.5), transparent 42%),
+    var(--paper);
+}
+
+.letter-scene[data-letter-phase="open"] {
+  padding: 0;
+  background: #f3e4cb;
+}
+
+.letter-scene[data-letter-phase="open"] .letter-intro {
+  display: none;
+}
+
+.letter-intro {
+  margin: 0 0 34px;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: clamp(23px, 6.4vw, 31px);
+  text-align: center;
+}
+
+.letter-envelope-stage {
+  display: flex;
+  width: 100%;
+  min-height: 390px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.letter-envelope {
+  position: relative;
+  width: min(86vw, 480px);
+  aspect-ratio: 1.58 / 1;
+  padding: 0;
+  overflow: visible;
+  background: linear-gradient(160deg, #f6e8d4, var(--paper-deep));
+  border: 1px solid rgb(140 29 47 / 0.2);
+  border-radius: 7px;
+  box-shadow: 0 20px 45px rgb(43 27 18 / 0.2);
+  cursor: pointer;
+  perspective: 1200px;
+}
+
+.letter-envelope:focus-visible,
+.letter-skip:focus-visible,
+.audio-note:focus-visible,
+.finale-gift-tag:focus-visible,
+.finale-button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.letter-envelope:disabled {
+  cursor: default;
+}
+
+.letter-sheet-preview {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  right: 8%;
+  left: 8%;
+  height: 78%;
+  background-color: #f6ead7;
+  background-image: linear-gradient(
+    rgb(140 29 47 / 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 100% 28px;
+  border: 1px solid rgb(140 29 47 / 0.12);
+  box-shadow: 0 6px 16px rgb(43 27 18 / 0.1);
+  pointer-events: none;
+}
+
+.letter-envelope-flap {
+  position: absolute;
+  z-index: 5;
+  inset: 0 0 auto;
+  height: 56%;
+  background: linear-gradient(165deg, #f9eedf, #ead6b8);
+  border-bottom: 1px solid rgb(140 29 47 / 0.18);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+}
+
+.letter-envelope-pocket {
+  position: absolute;
+  z-index: 4;
+  inset: 40% 0 0;
+  background: linear-gradient(175deg, #f3e3ca, var(--paper-deep));
+  clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+  opacity: 0.98;
+}
+
+.letter-address {
+  position: absolute;
+  z-index: 6;
+  top: 67%;
+  left: 8%;
+  color: var(--ink);
+  font-family: "Caveat", cursive;
+  font-size: clamp(21px, 6vw, 31px);
+  transform: rotate(-3deg);
+}
+
+.letter-wax-position {
+  position: absolute;
+  z-index: 8;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.letter-wax-seal {
+  position: relative;
+  display: grid;
+  width: clamp(68px, 19vw, 82px);
+  height: clamp(68px, 19vw, 82px);
+  place-items: center;
+  filter: drop-shadow(0 6px 7px rgb(43 27 18 / 0.25));
+  transform-origin: center;
+}
+
+.letter-wax-half {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 35% 28%, rgb(255 255 255 / 0.14), transparent 28%),
+    var(--cherry);
+  border-radius: 48% 44% 52% 46% / 45% 53% 43% 55%;
+  box-shadow: inset -6px -7px 0 rgb(43 27 18 / 0.14);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.letter-wax-half-left {
+  clip-path: polygon(0 0, 54% 0, 50% 37%, 57% 48%, 49% 61%, 53% 100%, 0 100%);
+}
+
+.letter-wax-half-right {
+  clip-path: polygon(52% 0, 100% 0, 100% 100%, 51% 100%, 48% 62%, 55% 49%, 49% 38%);
+}
+
+.letter-scene[data-letter-phase="opening"] .letter-wax-half-left {
+  opacity: 0.55;
+  transform: translateX(-10px) rotate(-8deg);
+}
+
+.letter-scene[data-letter-phase="opening"] .letter-wax-half-right {
+  opacity: 0.55;
+  transform: translateX(10px) rotate(8deg);
+}
+
+.letter-wax-initial {
+  position: relative;
+  z-index: 2;
+  color: rgb(250 243 231 / 0.86);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(30px, 8vw, 39px);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow:
+    0 1px 0 rgb(255 255 255 / 0.22),
+    0 -1px 0 rgb(43 27 18 / 0.35);
+}
+
+.letter-open-prompt {
+  margin: 0;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: 21px;
+}
+
+.letter-paper {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  padding: clamp(58px, 10vw, 96px) clamp(22px, 8vw, 92px);
+  background-color: #f3e4cb;
+  background-image:
+    linear-gradient(rgb(140 29 47 / 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 15% 10%, rgb(255 255 255 / 0.38), transparent 36%);
+  background-size: 100% 28px, 100% 100%;
+  border: 1px solid rgb(140 29 47 / 0.12);
+  box-shadow: 0 18px 50px rgb(43 27 18 / 0.16);
+}
+
+.letter-copy {
+  position: relative;
+  width: min(100%, 680px);
+  margin: 0 auto;
+  padding-top: 16px;
+}
+
+.letter-skip {
+  position: absolute;
+  top: -42px;
+  right: -6px;
+  min-width: 64px;
+  min-height: 44px;
+  padding: 8px 10px;
+  color: rgb(43 27 18 / 0.68);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.audio-note {
+  min-height: 44px;
+  margin: 0 0 32px;
+  padding: 10px 16px;
+  color: var(--cherry);
+  background: rgb(250 243 231 / 0.74);
+  border: 1px solid rgb(140 29 47 / 0.24);
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgb(43 27 18 / 0.08);
+  cursor: pointer;
+}
+
+.letter-paragraphs {
+  color: var(--ink);
+  font-family: "Caveat", cursive;
+  font-size: clamp(21px, 5.8vw, 25px);
+  line-height: 1.55;
+}
+
+.letter-paragraphs p {
+  min-height: 1.55em;
+  margin: 0 0 24px;
+  white-space: pre-wrap;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 3px;
+  background: var(--cherry);
+  vertical-align: -0.12em;
+  animation: typewriter-blink var(--cursor-duration, 1s) steps(1, end) infinite;
+}
+
+.letter-signature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 68px;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: 24px;
+  line-height: 1.1;
+  transform: rotate(-2deg);
+}
+
+.letter-signature strong {
+  margin-top: 8px;
+  font-size: 33px;
+  font-weight: 600;
+}
+
+@keyframes typewriter-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+
+  49%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.finale-scene {
+  position: relative;
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 88px 20px 44px;
+  background:
+    radial-gradient(circle at 50% 10%, rgb(243 197 204 / 0.42), transparent 38%),
+    var(--paper);
+}
+
+.finale-content {
+  display: flex;
+  width: min(100%, 820px);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.finale-counter-label,
+.finale-counting {
+  margin: 0;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: clamp(22px, 6vw, 29px);
+}
+
+.finale-counter {
+  margin: 14px 0 8px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(31px, 8.4vw, 54px);
+  font-style: italic;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.08;
+}
+
+.finale-seconds {
+  display: none;
+}
+
+.finale-someday {
+  width: min(100%, 560px);
+  margin: 58px 0 40px;
+  padding: 26px clamp(20px, 7vw, 40px) 30px;
+  background-color: rgb(241 228 206 / 0.72);
+  background-image: linear-gradient(
+    rgb(140 29 47 / 0.065) 1px,
+    transparent 1px
+  );
+  background-size: 100% 28px;
+  border: 1px solid rgb(140 29 47 / 0.12);
+  box-shadow: 0 10px 28px rgb(43 27 18 / 0.1);
+  text-align: left;
+  transform: rotate(-0.6deg);
+}
+
+.finale-someday h2 {
+  margin: 0 0 18px;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.finale-someday ul {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.finale-someday li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.finale-checkbox {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin-top: 4px;
+  border: 1.5px solid var(--cherry);
+  border-radius: 2px;
+}
+
+.finale-gift-tag {
+  width: min(100%, 360px);
+  min-height: 108px;
+  margin: 0 0 32px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.finale-gift-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 108px;
+  transform-style: preserve-3d;
+}
+
+.finale-gift-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--paper-deep);
+  border: 1px solid rgb(140 29 47 / 0.22);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgb(43 27 18 / 0.13);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+}
+
+.finale-gift-front {
+  color: var(--cherry);
+}
+
+.finale-gift-back {
+  transform: rotateY(180deg);
+}
+
+.finale-button {
+  min-height: 48px;
+  padding: 12px 26px;
+  color: var(--paper);
+  background: var(--cherry);
+  border: 1px solid var(--cherry);
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgb(140 29 47 / 0.22);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.finale-content footer {
+  margin-top: 58px;
+  color: rgb(43 27 18 / 0.64);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.finale-takeover {
+  position: fixed;
+  z-index: 60;
+  display: grid;
+  inset: 0;
+  min-height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: 28px;
+  color: var(--paper);
+  background:
+    radial-gradient(circle at 50% 45%, rgb(192 51 77 / 0.55), transparent 50%),
+    var(--night);
+}
+
+.finale-takeover-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 780px);
+  text-align: center;
+}
+
+.finale-takeover-copy p {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(38px, 10vw, 76px);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.finale-takeover-copy p + p {
+  margin-top: 24px;
+  color: var(--blush);
+  font-size: clamp(25px, 6.5vw, 46px);
+}
+
+.finale-heart-rain {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.finale-heart-rain span {
+  position: absolute;
+  top: -42px;
+  color: rgb(243 197 204 / 0.72);
+  text-shadow: 0 0 12px rgb(243 197 204 / 0.28);
+  animation: finale-heart-fall linear infinite;
+}
+
+@keyframes finale-heart-fall {
+  from {
+    transform: translate3d(-12px, -8vh, 0) rotate(-12deg);
+  }
+
+  to {
+    transform: translate3d(18px, 116vh, 0) rotate(32deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .finale-seconds {
+    display: inline;
+  }
+}
+
 @keyframes heart-fill {
   0% {
     clip-path: inset(100% 0 0);
