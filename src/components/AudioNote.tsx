@@ -9,6 +9,7 @@ interface AudioNoteProps {
 export function AudioNote({ src }: AudioNoteProps) {
   const soundRef = useRef<Howl>();
   const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const sound = new Howl({
@@ -32,10 +33,13 @@ export function AudioNote({ src }: AudioNoteProps) {
         audio.restore();
       },
       onloaderror: () => {
+        // A missing or broken file should leave no dead control behind.
+        setFailed(true);
         setPlaying(false);
         audio.restore();
       },
       onplayerror: () => {
+        setFailed(true);
         setPlaying(false);
         audio.restore();
       },
@@ -49,6 +53,8 @@ export function AudioNote({ src }: AudioNoteProps) {
     };
   }, [src]);
 
+  if (failed) return null;
+
   const toggle = () => {
     const sound = soundRef.current;
     if (!sound) return;
@@ -60,11 +66,11 @@ export function AudioNote({ src }: AudioNoteProps) {
     <button
       type="button"
       className="audio-note"
-      aria-label={playing ? "Pause voice note" : "Play voice note"}
+      aria-label={playing ? "Pause the voice recording" : "Hear the letter in his voice"}
       aria-pressed={playing}
       onClick={toggle}
     >
-      {playing ? "❚❚ pause my voice" : "▶ press play to hear me read it"}
+      {playing ? "❚❚ pause my voice" : "▶ hear it in my voice"}
     </button>
   );
 }

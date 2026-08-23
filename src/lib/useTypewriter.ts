@@ -1,6 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { reducedMotion } from "./motion";
 
+// Pacing for a long letter: fast inside a sentence so it reads like a hand
+// moving, with a real breath at every full stop. Lands around 290 wpm — ahead
+// of a natural reading pace, so she is never left waiting on the next word.
+const CHAR_BASE_MS = 28;
+const CHAR_JITTER_MS = 8;
+const SENTENCE_PAUSE_MS = 420;
+const CLAUSE_PAUSE_MS = 160;
+const PARAGRAPH_PAUSE_MS = 600;
+
 export function useTypewriter(paragraphs: string[]) {
   const [rendered, setRendered] = useState<string[]>(
     reducedMotion ? [...paragraphs] : [],
@@ -55,7 +64,7 @@ export function useTypewriter(paragraphs: string[]) {
           next[paragraphIndex] = "";
           return next;
         });
-        timerRef.current = window.setTimeout(typeNext, 500);
+        timerRef.current = window.setTimeout(typeNext, PARAGRAPH_PAUSE_MS);
         return;
       }
 
@@ -67,12 +76,18 @@ export function useTypewriter(paragraphs: string[]) {
       });
       characterIndex += 1;
 
-      const punctuationPause = /[.,—;:]/.test(character) ? 260 : 0;
-      const delay = 22 + Math.random() * 10 + punctuationPause;
+      let pause = 0;
+      if (/[.!?]/.test(character)) pause = SENTENCE_PAUSE_MS;
+      else if (/[,;:—]/.test(character)) pause = CLAUSE_PAUSE_MS;
+
+      const delay = CHAR_BASE_MS + Math.random() * CHAR_JITTER_MS + pause;
       timerRef.current = window.setTimeout(typeNext, delay);
     };
 
-    timerRef.current = window.setTimeout(typeNext, 22 + Math.random() * 10);
+    timerRef.current = window.setTimeout(
+      typeNext,
+      CHAR_BASE_MS + Math.random() * CHAR_JITTER_MS,
+    );
 
     return () => {
       if (timerRef.current !== undefined) {

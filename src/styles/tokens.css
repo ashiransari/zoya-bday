@@ -879,6 +879,25 @@ button {
   white-space: pre-wrap;
 }
 
+.letter-closing {
+  margin-top: 44px;
+  color: var(--cherry);
+  font-family: "Caveat", cursive;
+  font-size: clamp(26px, 7vw, 34px);
+  line-height: 1.35;
+}
+
+.letter-closing p {
+  min-height: 1.35em;
+  margin: 0 0 6px;
+}
+
+/* Scroll target for the typewriter — keeps the writing line off the bottom edge. */
+.letter-tail {
+  height: 4rem;
+  pointer-events: none;
+}
+
 .typewriter-cursor {
   display: inline-block;
   width: 2px;

@@ -1,5 +1,7 @@
 import {
+  memo,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
@@ -15,13 +17,55 @@ import {
   SPRING,
 } from "../lib/motion";
 import { seededRotation } from "../lib/seededRandom";
+import { useScrollFollow } from "../lib/useScrollFollow";
 import { useTypewriter } from "../lib/useTypewriter";
 
 type LetterPhase = "sealed" | "opening" | "open";
 
+/** Memoised so finished paragraphs stop re-rendering as the letter grows. */
+const LetterLine = memo(function LetterLine({
+  text,
+  showCursor,
+}: {
+  text: string;
+  showCursor: boolean;
+}) {
+  return (
+    <p>
+      {text}
+      {showCursor && (
+        <span
+          className="typewriter-cursor"
+          style={
+            {
+              "--cursor-duration": `${LETTER_TIMING.cursorBlink}s`,
+            } as CSSProperties
+          }
+          aria-hidden="true"
+        />
+      )}
+    </p>
+  );
+});
+
 function LetterText() {
-  const { rendered, done, skip } = useTypewriter(content.letter.paragraphs);
-  const visibleParagraphs = rendered.length > 0 ? rendered : [""];
+  // The closing lines type out with the rest, then get their own styling.
+  const bodyCount = content.letter.paragraphs.length;
+  const script = useMemo(
+    () => [...content.letter.paragraphs, ...content.letter.closingLines],
+    [],
+  );
+  const { rendered, done, skip } = useTypewriter(script);
+  const { tailRef, follow } = useScrollFollow(!done);
+
+  const written = rendered.length > 0 ? rendered : [""];
+  const lastIndex = written.length - 1;
+  const writtenChars = written.reduce((sum, line) => sum + line.length, 0);
+
+  useEffect(follow, [writtenChars, follow]);
+
+  const body = written.slice(0, bodyCount);
+  const closing = written.slice(bodyCount);
 
   return (
     <div className="letter-copy" data-typewriter-done={done}>
@@ -34,23 +78,29 @@ function LetterText() {
       {content.letter.voiceSrc && <AudioNote src={content.letter.voiceSrc} />}
 
       <div className="letter-paragraphs">
-        {visibleParagraphs.map((paragraph, index) => (
-          <p key={index}>
-            {paragraph}
-            {!done && index === visibleParagraphs.length - 1 && (
-              <span
-                className="typewriter-cursor"
-                style={
-                  {
-                    "--cursor-duration": `${LETTER_TIMING.cursorBlink}s`,
-                  } as CSSProperties
-                }
-                aria-hidden="true"
-              />
-            )}
-          </p>
+        {body.map((paragraph, index) => (
+          <LetterLine
+            key={index}
+            text={paragraph}
+            showCursor={!done && index === lastIndex}
+          />
         ))}
       </div>
+
+      {closing.length > 0 && (
+        <div className="letter-closing">
+          {closing.map((line, index) => (
+            <LetterLine
+              key={index}
+              text={line}
+              showCursor={!done && index + bodyCount === lastIndex}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Scroll target: gives the writing line room to breathe above the fold. */}
+      <div ref={tailRef} className="letter-tail" aria-hidden="true" />
 
       {done && (
         <motion.div
