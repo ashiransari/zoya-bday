@@ -3,7 +3,8 @@ import { Howl } from "howler";
 import { audio } from "../lib/audio";
 
 interface AudioNoteProps {
-  src: string;
+  /** Undefined until the recording is added — the button still shows, inert. */
+  src?: string;
 }
 
 export function AudioNote({ src }: AudioNoteProps) {
@@ -12,6 +13,8 @@ export function AudioNote({ src }: AudioNoteProps) {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    if (!src) return;
+
     const sound = new Howl({
       src: [src],
       html5: true,
@@ -53,7 +56,7 @@ export function AudioNote({ src }: AudioNoteProps) {
     };
   }, [src]);
 
-  if (failed) return null;
+  if (src && failed) return null;
 
   const toggle = () => {
     const sound = soundRef.current;
@@ -70,7 +73,7 @@ export function AudioNote({ src }: AudioNoteProps) {
       aria-pressed={playing}
       onClick={toggle}
     >
-      {playing ? "❚❚ pause my voice" : "▶ hear it in my voice"}
+      {playing ? "Pause my voice" : "Hear it in my voice"}
     </button>
   );
 }

@@ -125,6 +125,7 @@ export const content = {
       "Happy Birthday Zoya. ❤️",
       "Always you.",
     ] as string[],
+    // Set to "/audio/letter.mp3" when the recording arrives.
     voiceSrc: undefined as string | undefined,
   },
 

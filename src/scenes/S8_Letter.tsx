@@ -75,7 +75,7 @@ function LetterText() {
         </button>
       )}
 
-      {content.letter.voiceSrc && <AudioNote src={content.letter.voiceSrc} />}
+      <AudioNote src={content.letter.voiceSrc} />
 
       <div className="letter-paragraphs">
         {body.map((paragraph, index) => (
