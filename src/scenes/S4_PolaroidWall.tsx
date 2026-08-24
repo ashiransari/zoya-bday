@@ -26,10 +26,25 @@ function itemId(src: string, index: number) {
   return `${src}-${index}`;
 }
 
-function scatterPosition(id: string) {
+// A jittered grid, not a free scatter: every card owns a cell, then gets a
+// small seeded nudge and its rotation. With 13 portrait cards a true random
+// scatter degenerates into piles; this keeps the scrapbook look usable.
+const BOARD_COLS = 5;
+const BOARD_ROW_HEIGHT = 430;
+
+const boardRows = Math.ceil(content.polaroids.length / BOARD_COLS);
+const boardHeight = boardRows * BOARD_ROW_HEIGHT + 130;
+
+function boardPosition(id: string, index: number) {
+  const col = index % BOARD_COLS;
+  // Stagger odd rows by half a cell so columns don't read as strict lines.
+  const row = Math.floor(index / BOARD_COLS);
+  const colShift = row % 2 === 1 ? 9 : 0;
+  // Cap so a staggered last column never hangs off the board's right edge.
+  const left = Math.min(2 + col * 18.4 + colShift + seeded(`${id}-x`) * 3.5, 75);
   return {
-    left: `${5 + seeded(`${id}-x`) * 68}%`,
-    top: `${4 + seeded(`${id}-y`) * 44}%`,
+    left: `${left}%`,
+    top: `${28 + row * BOARD_ROW_HEIGHT + seeded(`${id}-y`) * 46}px`,
   };
 }
 
@@ -149,11 +164,12 @@ export function S4_PolaroidWall() {
       <div
         ref={boardRef}
         data-testid="desktop-polaroid-board"
-        className="polaroid-board relative mx-auto hidden h-[90dvh] min-h-[650px] max-h-[900px] max-w-7xl overflow-hidden rounded-2xl border border-cherry/15 shadow-[inset_0_0_60px_rgb(43_27_18_/_0.08)] md:block"
+        className="polaroid-board relative mx-auto hidden max-w-7xl overflow-hidden rounded-2xl border border-cherry/15 shadow-[inset_0_0_60px_rgb(43_27_18_/_0.08)] md:block"
+        style={{ height: boardHeight }}
       >
         {content.polaroids.map((item, index) => {
           const id = itemId(item.src, index);
-          const position = scatterPosition(id);
+          const position = boardPosition(id, index);
           const flipped = flippedIds.has(id);
 
           return (
