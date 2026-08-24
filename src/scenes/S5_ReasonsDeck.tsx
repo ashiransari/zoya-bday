@@ -188,8 +188,11 @@ export function S5_ReasonsDeck() {
                 >
                   Reason #{revealedIndex + 1}
                 </span>
-                <p className="relative z-10 mt-6 font-handwriting text-[22px] leading-snug">
-                  {revealedReason}
+                <h3 className="relative z-10 mt-6 font-handwriting text-[27px] font-semibold leading-tight">
+                  {revealedReason.title}
+                </h3>
+                <p className="relative z-10 mt-3 whitespace-pre-line font-handwriting text-[21px] leading-snug opacity-90">
+                  {revealedReason.text}
                 </p>
               </motion.article>
             ) : (

@@ -21,6 +21,11 @@ export interface PolaroidItem {
   aspect?: "landscape" | "portrait";
 }
 
+export interface Reason {
+  title: string;
+  text: string;
+}
+
 export interface OpenWhenLetter {
   label: string;
   note: string;
@@ -206,10 +211,99 @@ export const content = {
   ] as PolaroidItem[],
 
   reasons: [
-    // REPLACE ALL — length MUST equal her.turningAge; LAST item is the special one
-    "the way you narrate the dog's thoughts.",
-    "Reason #26: you said yes.",
-  ] as string[],
+    {
+      title: "Your face. All of it.",
+      text: "Your eyes, your smile, your longgggg hair, your tiny hands, that beautiful face… I genuinely can't pick one. I love all of you.",
+    },
+    {
+      title: "Your kisses.",
+      text: "You can fix my mood with one kiss and make me think that life isn't that bad.",
+    },
+    {
+      title: "The way you mock me.",
+      text: "You mimic me just to annoy me, but somehow you still sound so fucking cute doing it.",
+    },
+    {
+      title: "Your possessiveness.",
+      text: "That little “he's mine” side of you makes me feel ridiculously loved.",
+    },
+    {
+      title: "Your “stupid.”",
+      text: "You can call me stupid and somehow I'll still be sitting there smiling like an idiot.",
+    },
+    {
+      title: "Our silent VCs.",
+      text: "I love that we can be on a call doing absolutely nothing and still be perfectly happy just knowing we're together.",
+    },
+    {
+      title: "You listen to my nonsense.",
+      text: "I can talk about movies, actors, behind-the-scenes gossip and completely useless shit for hours, and you still listen. ❤️",
+    },
+    {
+      title: "Our KitKat milkshake.",
+      text: "That little spark in your eyes when you take the first sip will never stop making me happy.",
+    },
+    {
+      title: "Food fixes everything.",
+      text: "Watching your mood instantly improve the moment you get something tasty is one of my favourite things.",
+    },
+    {
+      title: "Your “Babyyyyy.”",
+      text: "I don't think you'll ever understand how much I love hearing you call me Babyyyyy or Jaanu.",
+    },
+    {
+      title: "Your “I miss you.”",
+      text: "Because I know your “I miss you” secretly means “I love you.” And I love hearing both.",
+    },
+    {
+      title: "Your Barbaad obsession.",
+      text: "I love that you only want to hear Barbaad when I sing it. And I bet you're wishing you could hear it right now. 😌",
+    },
+    {
+      title: "Your heart.",
+      text: "You're kind and respectful to people even when you don't have to be. I notice that.",
+    },
+    {
+      title: "Your loyalty.",
+      text: "You've given me a kind of security and peace that I never want to take for granted.",
+    },
+    {
+      title: "The way you take care of me.",
+      text: "When I'm lost or down, you somehow know how to be there. Sometimes that's all I need.",
+    },
+    {
+      title: "Your determination.",
+      text: "Even when you're sleepy, tired or sick, you still make sure your work gets done. I genuinely admire that about you.",
+    },
+    {
+      title: "Your happy face.",
+      text: "I love watching your entire face light up when you're genuinely happy. Your happiness makes me happy.",
+    },
+    {
+      title: "The way you make me feel wanted.",
+      text: "When you miss me, want me around or insist that I come see you, I love knowing that you genuinely want me there.",
+    },
+    {
+      title: "How comfortable I am with you.",
+      text: "I can sit beside you, say nothing, do nothing and still be completely happy. I've never felt that comfortable with anyone else.",
+    },
+    {
+      title: "Your little habits.",
+      text: "The random things you say, your expressions, your reactions, your weird little ways. I notice them all, and I love them.",
+    },
+    {
+      title: "Sharing life with you.",
+      text: "Food, movies, random conversations, stupid jokes — everything somehow becomes better when I'm doing it with you.",
+    },
+    {
+      title: "The little things you do.",
+      text: "A message, a call, a kiss, your laugh, seeing your name on my phone. Tiny things, but somehow you make my entire day better.",
+    },
+    {
+      title: "Because you feel like reaching the top.",
+      text: "Loving you feels like finishing the hardest trek of my life — exhausted, breathless, wondering if I can take another step.\n\nThen I reach the top. The breeze hits, the rain falls, I see the view and suddenly realise: every step was worth it.\n\nThat's you, Baby.\n\nAnd I'd walk the whole fucking trek again, just to reach you. ❤️",
+    },
+  ] as Reason[],
 
   openWhen: [
     // REPLACE ALL — 5–8 items; see label ideas in Appendix B
