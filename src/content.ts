@@ -52,8 +52,7 @@ export const content = {
   music: {
     heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" },
     vinyl: {
-      // TEMPORARY placeholder tone. swap to "/audio/barbaad.mp3" when his recording lands.
-      src: "/audio/PLACEHOLDER-barbaad.wav",
+      src: "/audio/barbaad.mp3",
       title: "Barbaad",
       subtitle: "sung by me, only for you",
       kicker: "remember reason #12? i heard you.",

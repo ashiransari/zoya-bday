@@ -1805,13 +1805,13 @@ button {
   height: 92%;
   background: linear-gradient(180deg, #cdb388, #a68f68);
   border-radius: 3px;
-  transform: rotate(24deg);
+  transform: rotate(-6deg);
   transform-origin: top center;
   transition: transform 0.9s cubic-bezier(0.34, 1.2, 0.5, 1);
 }
 
 .vinyl-player[data-playing="true"] .vinyl-arm-rod {
-  transform: rotate(4deg);
+  transform: rotate(20deg);
 }
 
 .vinyl-arm-head {
