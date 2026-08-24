@@ -1649,3 +1649,239 @@ button {
     animation: none;
   }
 }
+
+/* ── Vinyl (Barbaad) ─────────────────────────────────────────────── */
+
+.vinyl-scene {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 20px 120px;
+  background:
+    radial-gradient(circle at 50% 20%, rgb(243 197 204 / 0.28), transparent 55%),
+    var(--paper);
+}
+
+.vinyl-player {
+  position: relative;
+  width: min(78vw, 340px);
+  margin-right: 44px;
+}
+
+.vinyl-disc {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: #171313;
+  border: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 18px 50px rgb(43 27 18 / 0.35),
+    inset 0 0 0 2px rgb(255 255 255 / 0.05);
+  cursor: pointer;
+  animation: vinyl-spin 3.2s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-player[data-playing="true"] .vinyl-disc {
+  animation-play-state: running;
+}
+
+.vinyl-disc:disabled {
+  cursor: default;
+  filter: saturate(0.7);
+}
+
+.vinyl-disc:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 5px;
+}
+
+.vinyl-grooves {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    #1c1717 0px,
+    #1c1717 3px,
+    #221c1c 4px,
+    #171313 6px
+  );
+}
+
+.vinyl-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 40deg,
+    transparent 0deg,
+    rgb(255 255 255 / 0.07) 24deg,
+    transparent 60deg,
+    transparent 180deg,
+    rgb(255 255 255 / 0.05) 210deg,
+    transparent 250deg
+  );
+}
+
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 36%;
+  aspect-ratio: 1;
+  place-content: center;
+  gap: 2px;
+  background:
+    radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.16), transparent 55%),
+    var(--cherry);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.vinyl-label-initials {
+  color: var(--paper);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(17px, 4.4vw, 22px);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.vinyl-label-title {
+  color: rgb(250 243 231 / 0.78);
+  font-family: "Caveat", cursive;
+  font-size: clamp(13px, 3.2vw, 16px);
+}
+
+.vinyl-spindle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgb(23 19 19 / 0.6);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes vinyl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tonearm. Pivots from its base at the player's top right. */
+.vinyl-arm {
+  position: absolute;
+  top: -6px;
+  right: -40px;
+  width: 44px;
+  height: 60%;
+  pointer-events: none;
+}
+
+.vinyl-arm-base {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(145deg, #d8c6a4, #b09a72);
+  border-radius: 50%;
+  box-shadow: 0 6px 14px rgb(43 27 18 / 0.3);
+}
+
+.vinyl-arm-rod {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 4px;
+  height: 92%;
+  background: linear-gradient(180deg, #cdb388, #a68f68);
+  border-radius: 3px;
+  transform: rotate(24deg);
+  transform-origin: top center;
+  transition: transform 0.9s cubic-bezier(0.34, 1.2, 0.5, 1);
+}
+
+.vinyl-player[data-playing="true"] .vinyl-arm-rod {
+  transform: rotate(4deg);
+}
+
+.vinyl-arm-head {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 12px;
+  height: 22px;
+  background: linear-gradient(180deg, #d8c6a4, #8f7a56);
+  border-radius: 3px;
+  transform: translateX(-50%);
+}
+
+.vinyl-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 360px);
+  margin-top: 36px;
+}
+
+.vinyl-buttons {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.vinyl-play,
+.vinyl-skip {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--cherry);
+  background: rgb(250 243 231 / 0.85);
+  border: 1px solid rgb(140 29 47 / 0.25);
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgb(43 27 18 / 0.1);
+  cursor: pointer;
+  font-family: "Courier Prime", monospace;
+  font-size: 15px;
+}
+
+.vinyl-play {
+  min-width: 62px;
+  min-height: 62px;
+  font-size: 20px;
+  background: var(--cherry);
+  color: var(--paper);
+  border-color: rgb(140 29 47 / 0.4);
+}
+
+.vinyl-play:focus-visible,
+.vinyl-skip:focus-visible,
+.vinyl-seek:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.vinyl-seek {
+  width: 100%;
+  margin-top: 22px;
+  accent-color: var(--cherry);
+}
+
+.vinyl-time {
+  margin-top: 10px;
+  color: rgb(43 27 18 / 0.55);
+  font-family: "Courier Prime", monospace;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}

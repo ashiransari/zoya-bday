@@ -49,7 +49,16 @@ export const content = {
       "making love in every corner of the world",
     ],
   },
-  music: { heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" } },
+  music: {
+    heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" },
+    vinyl: {
+      // TEMPORARY placeholder tone. swap to "/audio/barbaad.mp3" when his recording lands.
+      src: "/audio/PLACEHOLDER-barbaad.wav",
+      title: "Barbaad",
+      subtitle: "sung by me, only for you",
+      kicker: "remember reason #12? i heard you.",
+    },
+  },
 
   chapters: [
     {

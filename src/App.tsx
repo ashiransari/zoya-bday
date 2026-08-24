@@ -15,6 +15,7 @@ import { S5_ReasonsDeck } from "./scenes/S5_ReasonsDeck";
 import { S6_OpenWhen } from "./scenes/S6_OpenWhen";
 import { S7_Cake } from "./scenes/S7_Cake";
 import { S8_Letter } from "./scenes/S8_Letter";
+import { S8b_Vinyl } from "./scenes/S8b_Vinyl";
 import { S9_Finale } from "./scenes/S9_Finale";
 
 if (content.reasons.length !== content.her.turningAge) {
@@ -51,6 +52,7 @@ function App() {
         <S6_OpenWhen />
         <S7_Cake />
         <S8_Letter />
+        <S8b_Vinyl />
         <S9_Finale />
       </>
     );

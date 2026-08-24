@@ -64,10 +64,29 @@ function swell() {
   }, SWELL_UP_MS + SWELL_HOLD_MS);
 }
 
+let suspended = false;
+
+// The vinyl takes the floor entirely. Not a duck. The hero song pauses and
+// picks back up from the same spot once the record stops.
+function suspend() {
+  if (started && soundId !== undefined && music.playing(soundId)) {
+    music.pause(soundId);
+    suspended = true;
+  }
+}
+
+function resume() {
+  if (suspended && soundId !== undefined) {
+    suspended = false;
+    music.play(soundId);
+    music.volume(FULL_VOLUME, soundId);
+  }
+}
+
 function toggleMute() {
   muted = !muted;
   music.mute(muted, soundId);
   return muted;
 }
 
-export const audio = { start, duck, restore, swell, toggleMute };
+export const audio = { start, duck, restore, swell, suspend, resume, toggleMute };
