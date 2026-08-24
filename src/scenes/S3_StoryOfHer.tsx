@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Polaroid } from "../components/Polaroid";
 import { Section } from "../components/Section";
@@ -224,9 +224,11 @@ export function S3_StoryOfHer() {
           <button
             type="button"
             className="teddy-easter-button"
-            style={{
-              transform: `rotate(${seededRotation("story-teddy")}deg)`,
-            }}
+            style={
+              {
+                "--teddy-rot": `${seededRotation("story-teddy")}deg`,
+              } as CSSProperties
+            }
             aria-label="Tap the tiny teddy bear"
             disabled={!giftOpened}
             onClick={() => window.dispatchEvent(new Event(TEDDY_TAP_EVENT))}
