@@ -329,7 +329,7 @@ export const content = {
     {
       label: "open when you need to laugh",
       emoji: "😂",
-      note: "Okay Baby, I have two stories for you.\n\nExhibit A. Remember when we weren't even together and I was meeting you alone outside your college for the first time? I thought smoking a cigarette with one hand while riding my bike would make me look cool.\n\nI reached near you…\n\nAND FUCKING FELL OFF THE BIKE.\n\nThat was my grand entrance. 😭\n\nExhibit B. When my family came to your house for the marriage proposal and you looked at your sister-in-law, thought she was Zoya, and got shocked for a few seconds. Imagine being confused about your own identity at your own marriage proposal. 😭😭\n\nSo if you're still not laughing after this, honestly I don't know what to do with you.\n\nBut at least remember one thing. You chose this idiot.",
+      note: "Okay Baby, I have two stories for you.\n\nStory 1. Remember when we weren't even together and I was meeting you alone outside your college for the first time? I thought smoking a cigarette with one hand while riding my bike would make me look cool.\n\nI reached near you…\n\nAND FUCKING FELL OFF THE BIKE.\n\nThat was my grand entrance. 😭\n\nStory 2. When my family came to your house for the marriage proposal and you looked at your sister-in-law, thought she was Zoya, and got shocked for a few seconds. Imagine being confused about your own identity at your own marriage proposal. 😭😭\n\nSo if you're still not laughing after this, honestly I don't know what to do with you.\n\nBut at least remember one thing. You chose this idiot.",
     },
     {
       label: "open when you doubt yourself",
