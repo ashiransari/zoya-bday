@@ -3,6 +3,8 @@ export interface Chapter {
   title: string;
   dateLabel: string;
   photo: string;
+  /** Frame shape for this photo. Defaults to landscape. */
+  aspect?: "landscape" | "portrait";
   lines: string[];
   artifact?: {
     kind: "image" | "note";
@@ -16,6 +18,7 @@ export interface PolaroidItem {
   src: string;
   caption: string;
   backNote: string;
+  aspect?: "landscape" | "portrait";
 }
 
 export interface OpenWhenLetter {
@@ -40,25 +43,78 @@ export const content = {
   music: { heroSong: { src: "/audio/our-song.mp3", title: "Song — Artist" } },
 
   chapters: [
-    // REPLACE ALL — 5–7 items, childhood → today, incl. the "and then, luckily for me…" chapter
     {
       id: "ch-1",
       title: "Before Everything",
-      dateLabel: "circa 2003",
+      dateLabel: "the very beginning",
       photo: "/photos/ch1.webp",
-      lines: ["exhibit A: the cutest kid in the world.", "some things never change."],
+      aspect: "portrait",
+      lines: [
+        "the world just got lucky and didn't even know it yet.",
+      ],
     },
     {
       id: "ch-2",
-      title: "The Day We Met",
-      dateLabel: "14 Feb 2022",
+      title: "Madam Serious",
+      dateLabel: "tiny and furious",
       photo: "/photos/ch2.webp",
-      lines: ["you laughed at my worst joke.", "i was done for."],
-      artifact: {
-        kind: "image",
-        src: "/photos/first-text.webp",
-        label: "our actual first text",
-      },
+      aspect: "portrait",
+      lines: [
+        "the attitude arrived early.",
+        "this exact expression still shows up when i annoy you.",
+      ],
+    },
+    {
+      id: "ch-3",
+      title: "The Haircut Era",
+      dateLabel: "school days",
+      photo: "/photos/ch3.webp",
+      aspect: "portrait",
+      lines: [
+        "whoever chose this haircut... thank you. genuinely. iconic.",
+      ],
+    },
+    {
+      id: "ch-4",
+      title: "Before I Knew You",
+      dateLabel: "growing up",
+      photo: "/photos/ch4.webp",
+      aspect: "landscape",
+      lines: [
+        "somewhere out there, a boy was failing maths who'd one day write you all this.",
+      ],
+    },
+    {
+      id: "ch-5",
+      title: "Fourteen-ish",
+      dateLabel: "the tuition years",
+      photo: "/photos/ch5.webp",
+      aspect: "landscape",
+      lines: [
+        "this is the face that ruined my concentration in tuition forever.",
+      ],
+    },
+    {
+      id: "ch-6",
+      title: "All Grown Up",
+      dateLabel: "now",
+      photo: "/photos/ch6.webp",
+      aspect: "portrait",
+      lines: [
+        "that hair. that grace.",
+        "the little girl from these photos became the most beautiful woman i've ever seen.",
+      ],
+    },
+    {
+      id: "ch-7",
+      title: "And Then, Luckily for Me…",
+      dateLabel: "the day you said yes",
+      photo: "/photos/ch7.webp",
+      aspect: "landscape",
+      lines: [
+        "the little girl in those photos, all grown up, wearing my ring.",
+        "still can't believe you picked me.",
+      ],
     },
   ] as Chapter[],
 

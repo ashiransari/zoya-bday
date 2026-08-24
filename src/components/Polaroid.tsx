@@ -12,6 +12,8 @@ interface PolaroidProps {
   backNote?: string;
   signature?: string;
   flipped?: boolean;
+  /** Frame shape. Defaults to landscape so existing call sites are unaffected. */
+  aspect?: "landscape" | "portrait";
 }
 
 export function Polaroid({
@@ -23,10 +25,12 @@ export function Polaroid({
   backNote,
   signature,
   flipped = false,
+  aspect = "landscape",
 }: PolaroidProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const rotation = seededRotation(id);
   const canFlip = Boolean(backNote);
+  const portrait = aspect === "portrait";
 
   return (
     <figure
@@ -62,7 +66,11 @@ export function Polaroid({
               aria-hidden="true"
             />
 
-            <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
+            <div
+              className={`relative overflow-hidden bg-paper-deep ${
+                portrait ? "aspect-[3/4]" : "aspect-[4/3]"
+              }`}
+            >
               <div
                 aria-hidden="true"
                 className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_35%_30%,rgba(243,197,204,0.65),transparent_48%),linear-gradient(145deg,var(--paper-deep),var(--paper))] font-handwriting text-xl text-cherry/55"
@@ -74,8 +82,8 @@ export function Polaroid({
                   className="absolute inset-0 h-full w-full object-cover"
                   src={src}
                   alt={alt}
-                  width="1200"
-                  height="900"
+                  width={portrait ? "900" : "1200"}
+                  height={portrait ? "1200" : "900"}
                   loading="lazy"
                   decoding="async"
                   onError={() => setImageFailed(true)}

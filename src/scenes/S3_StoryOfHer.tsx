@@ -48,12 +48,13 @@ function ChapterPhoto({
     <motion.div
       ref={parallaxRef}
       style={{ y: isDesktop && !reducedMotion ? y : 0 }}
-      className="mx-auto w-full max-w-[390px]"
+      className="relative mx-auto w-full max-w-[390px]"
     >
       <Polaroid
         id={chapter.id}
         src={chapter.photo}
         caption={chapter.dateLabel}
+        aspect={chapter.aspect}
         alt={`${chapter.title} — ${chapter.dateLabel}`}
       />
     </motion.div>

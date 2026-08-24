@@ -5,3 +5,9 @@ dist-ssr
 *.log
 *.tsbuildinfo
 .DS_Store
+
+# original photos — converted into public/photos/
+raw
+
+# crop previews for eyeballing conversions
+scripts/.preview
