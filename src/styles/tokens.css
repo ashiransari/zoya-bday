@@ -1495,6 +1495,14 @@ button {
   cursor: pointer;
 }
 
+.secret-modal[data-aspect="portrait"] {
+  width: min(78vw, 380px);
+}
+
+.secret-photo-frame[data-aspect="portrait"] {
+  aspect-ratio: 3 / 4;
+}
+
 .secret-photo-frame {
   position: relative;
   overflow: hidden;

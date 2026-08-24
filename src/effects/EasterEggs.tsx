@@ -21,6 +21,7 @@ export function EasterEggs() {
   const teddyTapsRef = useRef(0);
   const tapHeartIdRef = useRef(0);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const portraitSecret = content.easterEggs.secretAspect === "portrait";
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -141,6 +142,7 @@ export function EasterEggs() {
           >
             <motion.div
               className="secret-modal"
+              data-aspect={content.easterEggs.secretAspect}
               data-testid="teddy-secret-modal"
               role="dialog"
               aria-modal="true"
@@ -163,7 +165,10 @@ export function EasterEggs() {
               >
                 ×
               </button>
-              <div className="secret-photo-frame">
+              <div
+                className="secret-photo-frame"
+                data-aspect={content.easterEggs.secretAspect}
+              >
                 <div className="secret-photo-fallback" aria-hidden="true">
                   secret photo goes here
                 </div>
@@ -171,16 +176,15 @@ export function EasterEggs() {
                   <img
                     src={content.easterEggs.secretPhoto}
                     alt={`A secret memory with ${content.her.name}`}
-                    width="1200"
-                    height="900"
+                    width={portraitSecret ? "900" : "1200"}
+                    height={portraitSecret ? "1200" : "900"}
                     loading="lazy"
                     decoding="async"
                     onError={() => setSecretImageFailed(true)}
                   />
                 )}
               </div>
-              {/* SPEC-silent: the easter egg requires one short Caveat line but defines no content binding. */}
-              <p id="secret-modal-line">you found the secret one. of course you did. 🤍</p>
+              <p id="secret-modal-line">{content.easterEggs.secretLine}</p>
             </motion.div>
           </motion.div>
         )}

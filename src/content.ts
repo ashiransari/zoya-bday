@@ -270,5 +270,11 @@ export const content = {
     line2: "I love you. Today, tomorrow, always.",
   },
 
-  easterEggs: { secretPhoto: "/photos/secret.webp", teddyTapCount: 7 },
+  easterEggs: {
+    secretPhoto: "/photos/secret.webp",
+    secretAspect: "portrait" as "landscape" | "portrait",
+    secretLine:
+      "this is us according to the AI. it got you exactly right. it got me… very optimistic.",
+    teddyTapCount: 7,
+  },
 };

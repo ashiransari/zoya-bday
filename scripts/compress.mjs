@@ -116,6 +116,13 @@ const PHOTOS = [
   { out: "p12", src: "raw/polaroids/12.jpg", aspect: "portrait" },
   { out: "p13", src: "raw/polaroids/13.jpg", aspect: "portrait" },
   { out: "p14", src: "raw/polaroids/14.JPG", aspect: "portrait" },
+
+  // ── Teddy easter egg ─────────────────────────────────────────────────
+  {
+    out: "secret",
+    src: "raw/secret/WhatsApp Image 2026-08-24 at 10.48.23 PM.jpeg",
+    aspect: "portrait",
+  },
 ];
 
 /** Largest box of `ratio` that fits inside width×height, capped at MAX_EDGE. */
