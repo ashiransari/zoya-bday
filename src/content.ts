@@ -44,8 +44,8 @@ export const content = {
     startedISO: "2025-02-28T00:00:00+05:30",
     counterLabel: "loving you for",
     cantWaitFor: [
-      "going on a trip to japan",
-      "eating at every restaurant and cafe, leaving none",
+      "that trip to japan, just the two of us",
+      "eating our way through every restaurant and cafe until there are none left",
       "making love in every corner of the world",
     ],
   },
