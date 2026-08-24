@@ -166,7 +166,7 @@ export function S6_OpenWhen() {
                     {activeLetter.note}
                   </p>
                   <p className="mt-8 text-right font-handwriting text-xl text-cherry">
-                    love, {content.you.name.charAt(0)}
+                    — {content.you.name.charAt(0)}
                   </p>
                 </div>
               </motion.article>
