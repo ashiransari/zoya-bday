@@ -124,7 +124,7 @@ export function S2_GiftBox() {
         aria-hidden={phase === "open"}
       >
         <p className="absolute inset-x-0 top-0 text-center font-handwriting text-xl text-cherry md:text-2xl">
-          for {content.her.name} — tap the bow 🎀
+          for {content.her.name}. tap the bow 🎀
         </p>
 
         <div

@@ -45,7 +45,7 @@ export const content = {
     counterLabel: "loving you for",
     cantWaitFor: ["the first dance", "every ordinary Tuesday", "that trip we keep talking about"],
   },
-  music: { heroSong: { src: "/audio/our-song.mp3", title: "Song — Artist" } },
+  music: { heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" } },
 
   chapters: [
     {
@@ -134,7 +134,7 @@ export const content = {
       src: "/photos/p02.webp",
       aspect: "landscape",
       caption: "gateway, no boats.",
-      backNote: "we came for the sea. the sea said no. honestly? it did us a favour — look at these photos.",
+      backNote: "we came for the sea. the sea said no. honestly? it did us a favour. look at these photos.",
     },
     {
       src: "/photos/p03.webp",
@@ -293,7 +293,7 @@ export const content = {
     },
     {
       title: "Sharing life with you.",
-      text: "Food, movies, random conversations, stupid jokes — everything somehow becomes better when I'm doing it with you.",
+      text: "Food, movies, random conversations, stupid jokes. Everything somehow becomes better when I'm doing it with you.",
     },
     {
       title: "The little things you do.",
@@ -301,21 +301,21 @@ export const content = {
     },
     {
       title: "Because you feel like reaching the top.",
-      text: "Loving you feels like finishing the hardest trek of my life — exhausted, breathless, wondering if I can take another step.\n\nThen I reach the top. The breeze hits, the rain falls, I see the view and suddenly realise: every step was worth it.\n\nThat's you, Baby.\n\nAnd I'd walk the whole fucking trek again, just to reach you. ❤️",
+      text: "Loving you feels like finishing the hardest trek of my life. Exhausted, breathless, wondering if I can take another step.\n\nThen I reach the top. The breeze hits, the rain falls, I see the view and suddenly realise every step was worth it.\n\nThat's you, Baby.\n\nAnd I'd walk the whole fucking trek again, just to reach you. ❤️",
     },
   ] as Reason[],
 
   openWhen: [
-    // REPLACE ALL — 5–8 items; see label ideas in Appendix B
+    // REPLACE ALL. 5-8 items. See label ideas in Appendix B
     {
       label: "open when you miss me",
       emoji: "🥺",
-      note: "close your eyes. remember [our place]. i'm right there. now call me — yes, even at 3am. especially at 3am.",
+      note: "close your eyes. remember [our place]. i'm right there. now call me. yes, even at 3am. especially at 3am.",
     },
     {
       label: "open when you're mad at me",
       emoji: "😬",
-      note: "i'm sorry. i'm probably wrong. [inside joke]. come find me — i'll have your favorite snack ready.",
+      note: "i'm sorry. i'm probably wrong. [inside joke]. come find me. i'll have your favorite snack ready.",
     },
   ] as OpenWhenLetter[],
 

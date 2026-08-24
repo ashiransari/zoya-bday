@@ -204,7 +204,7 @@ export function S4_PolaroidWall() {
               onKeyDown={(event) => handleKeyDown(id, event)}
               role="button"
               tabIndex={0}
-              aria-label={`Flip polaroid: ${item.caption}`}
+              aria-label={`Flip polaroid, ${item.caption}`}
               aria-pressed={flipped}
             >
               <Polaroid
@@ -265,7 +265,7 @@ export function S4_PolaroidWall() {
               onKeyDown={(event) => handleKeyDown(id, event)}
               role="button"
               tabIndex={isActive ? 0 : -1}
-              aria-label={`Flip polaroid: ${item.caption}`}
+              aria-label={`Flip polaroid, ${item.caption}`}
               aria-pressed={flipped}
               aria-hidden={!isActive && !isNeighbor}
             >

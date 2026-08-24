@@ -55,7 +55,7 @@ function ChapterPhoto({
         src={chapter.photo}
         caption={chapter.dateLabel}
         aspect={chapter.aspect}
-        alt={`${chapter.title} — ${chapter.dateLabel}`}
+        alt={`${chapter.title}, ${chapter.dateLabel}`}
       />
     </motion.div>
   );

@@ -83,7 +83,7 @@ export function S6_OpenWhen() {
             open when…
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-handwriting text-2xl leading-snug text-ink/65">
-            little letters for later. these don&apos;t expire — come back whenever
+            little letters for later. these don&apos;t expire. come back whenever
             you need one.
           </p>
         </div>
@@ -166,7 +166,7 @@ export function S6_OpenWhen() {
                     {activeLetter.note}
                   </p>
                   <p className="mt-8 text-right font-handwriting text-xl text-cherry">
-                    — {content.you.name.charAt(0)}
+                    love, {content.you.name.charAt(0)}
                   </p>
                 </div>
               </motion.article>

@@ -58,7 +58,7 @@ export function S9_Finale() {
         <p className="finale-counting">…and counting. forever to go.</p>
 
         <div className="finale-someday">
-          <h2>someday soon:</h2>
+          <h2>someday soon</h2>
           <ul>
             {content.us.cantWaitFor.map((item) => (
               <li key={item}>
@@ -113,7 +113,7 @@ export function S9_Finale() {
         </button>
 
         <footer>
-          made with too much love and a questionable amount of code —{" "}
+          made with too much love and a questionable amount of code.{" "}
           {content.you.name}, {birthdayLabel}
         </footer>
       </motion.div>

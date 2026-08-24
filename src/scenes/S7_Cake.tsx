@@ -66,7 +66,7 @@ function BlowControls({ onBlow }: BlowControlsProps) {
   return (
     <div className="cake-controls" data-mic-status={status}>
       <p className="cake-cta">
-        <strong>blow out your candles</strong> — yes, really. use your breath 🎂
+        <strong>blow out your candles</strong>. yes, really. use your breath 🎂
       </p>
 
       {fallbackVisible ? (
