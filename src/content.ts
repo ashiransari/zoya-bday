@@ -43,7 +43,11 @@ export const content = {
   us: {
     startedISO: "2025-02-28T00:00:00+05:30",
     counterLabel: "loving you for",
-    cantWaitFor: ["the first dance", "every ordinary Tuesday", "that trip we keep talking about"],
+    cantWaitFor: [
+      "going on a trip to japan",
+      "eating at every restaurant and cafe, leaving none",
+      "making love in every corner of the world",
+    ],
   },
   music: { heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" } },
 
