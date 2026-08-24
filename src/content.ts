@@ -306,16 +306,35 @@ export const content = {
   ] as Reason[],
 
   openWhen: [
-    // REPLACE ALL. 5-8 items. See label ideas in Appendix B
     {
       label: "open when you miss me",
       emoji: "🥺",
-      note: "close your eyes. remember [our place]. i'm right there. now call me. yes, even at 3am. especially at 3am.",
+      note: "Baby,\n\nI know your first instinct is probably to call me, find some stupid reason for us to meet, or just sit there thinking about us.\n\nSo here's your reminder. I'm missing you too.\n\nUntil we can actually meet, call me. Even if we have nothing to say. Put me on VC, keep your phone beside you and let's just exist together like we always do.\n\nAnd if even that isn't enough, close your eyes for a second and imagine me sitting beside you, annoying you, and asking you what you want to eat.\n\nWe'll meet soon, Baby. You just have to survive until then. ❤️",
     },
     {
       label: "open when you're mad at me",
-      emoji: "😬",
-      note: "i'm sorry. i'm probably wrong. [inside joke]. come find me. i'll have your favorite snack ready.",
+      emoji: "😭",
+      note: "Okay. You're mad at me.\n\nAnd knowing you, you probably have a whole fucking courtroom case prepared against me already.\n\nSo I'm not going to argue with you. I'm not going to get angry because you're angry. I'm not going to try to win. And I'm definitely not going to say something stupid just because my ego wants the last word.\n\nTake your time. And whenever you're ready, come talk to me. I'll listen properly, I'll understand why you're hurt, and if I'm wrong, I'll say I'm wrong.\n\nBut before you decide to completely hate me for the next 48 hours, just remember one thing.\n\nI'm still your stupid. And you're still my Baby.\n\nNow come here. 🥺",
+    },
+    {
+      label: "open when you can't sleep",
+      emoji: "🌙",
+      note: "Babyyyy,\n\nFirst of all, if you slept in the evening and are now wondering why you're awake at 2 AM… this is entirely your fault. 😭\n\nBut if you're lying there overthinking everything that has happened in your past, stop for a moment. You don't have to solve your entire life tonight.\n\nWhatever happened has already happened. You don't have to relive it just because your brain has decided that midnight is the perfect time for a documentary about everything that ever hurt you.\n\nPut your phone down, take a deep breath, get comfortable and let yourself rest.\n\nAnd if your brain refuses to shut up, imagine me telling you “Bass karo baby. Ab soo jao. Baaki overthinking kar lena.”\n\nGoodnight, Jaanu. ❤️",
+    },
+    {
+      label: "open when you had a long day",
+      emoji: "🫂",
+      note: "Baby,\n\nYou've had a long day. So tonight, you don't have to be productive, impressive, strong or anything else.\n\nJust come here.\n\nImagine you're lying next to me, your head on me, we're cuddling and talking about absolutely everything and nothing at the same time.\n\nTell me about your day. Complain about whoever annoyed you. Tell me what pissed you off. Tell me something stupid that happened. And if you don't feel like talking, that's okay too. You can just lie there with me.\n\nNo work. No pressure. No expectations. Just us.\n\nNow breathe. You've done enough for today, Baby. ❤️",
+    },
+    {
+      label: "open when you need to laugh",
+      emoji: "😂",
+      note: "Okay Baby, I have two stories for you.\n\nExhibit A. Remember when we weren't even together and I was meeting you alone outside your college for the first time? I thought smoking a cigarette with one hand while riding my bike would make me look cool.\n\nI reached near you…\n\nAND FUCKING FELL OFF THE BIKE.\n\nThat was my grand entrance. 😭\n\nExhibit B. When my family came to your house for the marriage proposal and you looked at your sister-in-law, thought she was Zoya, and got shocked for a few seconds. Imagine being confused about your own identity at your own marriage proposal. 😭😭\n\nSo if you're still not laughing after this, honestly I don't know what to do with you.\n\nBut at least remember one thing. You chose this idiot.",
+    },
+    {
+      label: "open when you doubt yourself",
+      emoji: "❤️",
+      note: "Baby,\n\nI know sometimes you look at yourself and focus on the things you wish were different. Maybe you wish you were taller. Maybe being an introvert makes you question whether you're capable of doing certain things or putting yourself out there.\n\nBut you're judging yourself from inside your own head, where every little insecurity sounds ten times louder.\n\nI see something different. I see a girl who keeps showing up. Who gets her work done even when she's exhausted. Who can be quiet and still have so much to say. Who doesn't need to be the loudest person in the room to matter.\n\nYou don't have to become some completely different version of yourself to be impressive. You just have to stop underestimating the girl you already are.\n\nSo whenever that little voice tells you “maybe I'm not good enough,” don't believe it immediately. I've spent enough time watching you to know better.\n\nYou're capable of far more than you give yourself credit for.\n\nNow go prove yourself wrong. ❤️",
     },
   ] as OpenWhenLetter[],
 
