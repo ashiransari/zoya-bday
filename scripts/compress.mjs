@@ -1,10 +1,17 @@
 /**
  * Converts the originals in raw/ into the site's public/photos/*.webp.
  *
- * Crop rectangles are hand-tuned per photo (faces intact, screenshot
- * furniture removed) and chosen so no image is ever upscaled — every
- * output is a straight crop of the source at its native resolution,
- * then only downscaled if it exceeds MAX_EDGE.
+ * Two crop modes:
+ *  - `extract`  — a hand-tuned rectangle (story photos, where the right
+ *                 framing is a judgement call: screenshot furniture to
+ *                 remove, faces near an edge to protect).
+ *  - otherwise  — sharp's `attention` strategy picks the crop window,
+ *                 which handles a pile of 9:16 phone shots well enough
+ *                 that hand-tuning each one isn't worth it. Add an
+ *                 `extract` to any entry it gets wrong.
+ *
+ * Nothing is ever upscaled: the crop is taken at native resolution and
+ * only downscaled if it exceeds MAX_EDGE.
  *
  * Run: node scripts/compress.mjs
  * Previews for eyeballing land in scripts/.preview/ (gitignored).
@@ -18,6 +25,7 @@ const PREVIEW_DIR = "scripts/.preview";
 
 /** aspect: "portrait" = 3:4, "landscape" = 4:3 */
 const PHOTOS = [
+  // ── Story of Her (S3) ────────────────────────────────────────────────
   {
     out: "ch1",
     src: "raw/story/HS 1.jpeg",
@@ -65,29 +73,101 @@ const PHOTOS = [
     // She sits left of centre; anchor the 4:3 window to the left edge.
     extract: { left: 0, top: 0, width: 2261, height: 1696 },
   },
+
+  // ── Polaroid wall (S4) ───────────────────────────────────────────────
+  { out: "p01", src: "raw/polaroids/1.jpg", aspect: "landscape" },
+  {
+    out: "p02",
+    src: "raw/polaroids/2.JPG",
+    // The real photo is a landscape frame sitting inside a portrait canvas
+    // with grey bars; content measured at y 501..1100.
+    aspect: "landscape",
+    extract: { left: 50, top: 501, width: 800, height: 600 },
+  },
+  { out: "p03", src: "raw/polaroids/3.jpg", aspect: "portrait" },
+  { out: "p04", src: "raw/polaroids/4.JPG", aspect: "portrait" },
+  { out: "p05", src: "raw/polaroids/5.JPG", aspect: "portrait" },
+  { out: "p06", src: "raw/polaroids/6.JPG", aspect: "portrait" },
+  {
+    out: "p07",
+    src: "raw/polaroids/7.JPG",
+    aspect: "portrait",
+    // Attention chased the saree embroidery and cropped her head off.
+    extract: { left: 0, top: 0, width: 720, height: 960 },
+  },
+  { out: "p08", src: "raw/polaroids/8.JPG", aspect: "portrait" },
+  {
+    out: "p09",
+    src: "raw/polaroids/9.PNG",
+    aspect: "portrait",
+    // Dark cinema selfie, letterboxed. Attention cropped his face off —
+    // frame both of them by hand and lift the shadows.
+    extract: { left: 0, top: 370, width: 1320, height: 1760 },
+    brighten: 1.45,
+  },
+  { out: "p10", src: "raw/polaroids/10.JPG", aspect: "portrait" },
+  {
+    out: "p11",
+    src: "raw/polaroids/11.jpg",
+    aspect: "portrait",
+    // Anchor to the top so her forehead isn't sliced off.
+    extract: { left: 0, top: 0, width: 1320, height: 1760 },
+  },
+  { out: "p12", src: "raw/polaroids/12.jpg", aspect: "portrait" },
+  { out: "p13", src: "raw/polaroids/13.jpg", aspect: "portrait" },
+  { out: "p14", src: "raw/polaroids/14.JPG", aspect: "portrait" },
 ];
+
+/** Largest box of `ratio` that fits inside width×height, capped at MAX_EDGE. */
+function fitBox(width, height, ratio) {
+  let w;
+  let h;
+  if (width / height > ratio) {
+    h = height;
+    w = Math.round(height * ratio);
+  } else {
+    w = width;
+    h = Math.round(width / ratio);
+  }
+  const longEdge = Math.max(w, h);
+  if (longEdge > MAX_EDGE) {
+    const scale = MAX_EDGE / longEdge;
+    w = Math.round(w * scale);
+    h = Math.round(h * scale);
+  }
+  return { w, h };
+}
 
 mkdirSync("public/photos", { recursive: true });
 mkdirSync(PREVIEW_DIR, { recursive: true });
 
 for (const photo of PHOTOS) {
-  const wanted = photo.aspect === "portrait" ? 3 / 4 : 4 / 3;
-  const { width, height } = photo.extract;
-  const actual = width / height;
-  if (Math.abs(actual - wanted) > 0.005) {
-    throw new Error(
-      `${photo.out}: crop is ${actual.toFixed(3)}, expected ${wanted.toFixed(3)}`,
-    );
+  const ratio = photo.aspect === "portrait" ? 3 / 4 : 4 / 3;
+  let pipeline = sharp(photo.src).rotate();
+
+  if (photo.extract) {
+    const { width, height } = photo.extract;
+    const actual = width / height;
+    if (Math.abs(actual - ratio) > 0.005) {
+      throw new Error(
+        `${photo.out}: crop is ${actual.toFixed(3)}, expected ${ratio.toFixed(3)}`,
+      );
+    }
+    pipeline = pipeline.extract(photo.extract);
+    const box = fitBox(width, height, ratio);
+    if (box.w < width) pipeline = pipeline.resize(box.w, box.h);
+  } else {
+    const meta = await sharp(photo.src).rotate().metadata();
+    const box = fitBox(meta.width, meta.height, ratio);
+    pipeline = pipeline.resize(box.w, box.h, {
+      fit: "cover",
+      position: sharp.strategy.attention,
+    });
   }
 
-  const base = sharp(photo.src).rotate().extract(photo.extract);
-  const longEdge = Math.max(width, height);
-  const pipeline =
-    longEdge > MAX_EDGE
-      ? base.resize(
-          width >= height ? { width: MAX_EDGE } : { height: MAX_EDGE },
-        )
-      : base;
+  if (photo.brighten) {
+    pipeline = pipeline.modulate({ brightness: photo.brighten });
+  }
 
   // Step the quality down until it fits the budget.
   let quality = 80;
@@ -99,10 +179,13 @@ for (const photo of PHOTOS) {
     quality -= 6;
   }
 
-  await pipeline.clone().jpeg({ quality: 82 }).toFile(`${PREVIEW_DIR}/${photo.out}.jpg`);
+  await pipeline
+    .clone()
+    .jpeg({ quality: 82 })
+    .toFile(`${PREVIEW_DIR}/${photo.out}.jpg`);
 
   const kb = Math.round(statSync(dest).size / 1024);
   console.log(
-    `${photo.out}.webp  ${info.width}x${info.height}  ${photo.aspect.padEnd(9)} q${quality}  ${kb}KB`,
+    `${photo.out}.webp  ${String(info.width).padStart(4)}x${String(info.height).padEnd(4)}  ${photo.aspect.padEnd(9)} q${quality}  ${kb}KB`,
   );
 }

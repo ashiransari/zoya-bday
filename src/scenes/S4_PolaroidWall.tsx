@@ -29,7 +29,7 @@ function itemId(src: string, index: number) {
 function scatterPosition(id: string) {
   return {
     left: `${5 + seeded(`${id}-x`) * 68}%`,
-    top: `${5 + seeded(`${id}-y`) * 63}%`,
+    top: `${4 + seeded(`${id}-y`) * 44}%`,
   };
 }
 
@@ -195,6 +195,7 @@ export function S4_PolaroidWall() {
                 id={id}
                 src={item.src}
                 caption={item.caption}
+                aspect={item.aspect}
                 backNote={item.backNote}
                 signature={signature}
                 flipped={flipped}
@@ -206,7 +207,7 @@ export function S4_PolaroidWall() {
 
       <div
         data-testid="mobile-polaroid-stack"
-        className="relative mx-auto h-[430px] max-w-xl overflow-hidden md:hidden"
+        className="relative mx-auto h-[540px] max-w-xl overflow-hidden md:hidden"
       >
         {content.polaroids.map((item, index) => {
           const id = itemId(item.src, index);
@@ -256,6 +257,7 @@ export function S4_PolaroidWall() {
                 id={`${id}-mobile`}
                 src={item.src}
                 caption={item.caption}
+                aspect={item.aspect}
                 backNote={item.backNote}
                 signature={signature}
                 flipped={flipped}

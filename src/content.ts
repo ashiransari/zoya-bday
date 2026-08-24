@@ -119,11 +119,89 @@ export const content = {
   ] as Chapter[],
 
   polaroids: [
-    // REPLACE ALL — 10–16 items
     {
       src: "/photos/p01.webp",
-      caption: "that day.",
-      backNote: "you have no idea how hard i was trying to be cool here.",
+      aspect: "landscape",
+      caption: "10.01.2026.",
+      backNote: "the best decision either of us ever made. mine was asking. yours was saying yes.",
+    },
+    {
+      src: "/photos/p02.webp",
+      aspect: "landscape",
+      caption: "gateway, no boats.",
+      backNote: "we came for the sea. the sea said no. honestly? it did us a favour — look at these photos.",
+    },
+    {
+      src: "/photos/p03.webp",
+      aspect: "portrait",
+      caption: "the professional.",
+      backNote: "your company will put this face on their website like it belongs to them. it doesn't. it's taken.",
+    },
+    {
+      src: "/photos/p04.webp",
+      aspect: "portrait",
+      caption: "the first date.",
+      backNote: "chowpatty, the sunset, and me pretending my heart wasn't doing 200.",
+    },
+    {
+      src: "/photos/p05.webp",
+      aspect: "portrait",
+      caption: "a ♥ z.",
+      backNote: "three beads. the whole story.",
+    },
+    {
+      src: "/photos/p06.webp",
+      aspect: "portrait",
+      caption: "no caption needed.",
+      backNote: "i just stare at this one sometimes. you're not even doing anything. that's the problem.",
+    },
+    {
+      src: "/photos/p07.webp",
+      aspect: "portrait",
+      caption: "ammi's saree.",
+      backNote: "some kinds of beautiful are inherited. this one clearly is.",
+    },
+    {
+      src: "/photos/p08.webp",
+      aspect: "portrait",
+      caption: "birthday no. 22.",
+      backNote: "one hand full of gifts, the other full of you.",
+    },
+    {
+      src: "/photos/p09.webp",
+      aspect: "portrait",
+      caption: "yjhd.",
+      backNote: "some couples have a song. we have a whole film too, a borrowed hoodie, and a boy crying in the dark next to you.",
+    },
+    {
+      src: "/photos/p10.webp",
+      aspect: "portrait",
+      caption: "his turn.",
+      backNote: "first birthday of mine as your fiancé. i've decided every one from now on needs you in it. non-negotiable.",
+    },
+    {
+      src: "/photos/p11.webp",
+      aspect: "portrait",
+      caption: "your other me.",
+      backNote: "you say he looks exactly like me. he's also quieter and better behaved. keep him close when i'm not there.",
+    },
+    {
+      src: "/photos/p12.webp",
+      aspect: "portrait",
+      caption: "seekh + sharbat + you.",
+      backNote: "the face of a woman who takes food exactly as seriously as i do. this is why it works.",
+    },
+    {
+      src: "/photos/p13.webp",
+      aspect: "portrait",
+      caption: "professor zoya.",
+      backNote: "no notes. wear them more. that's it. that's the message.",
+    },
+    {
+      src: "/photos/p14.webp",
+      aspect: "portrait",
+      caption: "art.",
+      backNote: "museums have security guards for things like this. i just have a lock screen.",
     },
   ] as PolaroidItem[],
 
