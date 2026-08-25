@@ -50,9 +50,9 @@ export const content = {
     ],
   },
   music: {
-    heroSong: { src: "/audio/our-song.mp3", title: "Song by Artist" },
+    heroSong: { src: "/audio/our-song.mp3?v=2", title: "Song by Artist" },
     vinyl: {
-      src: "/audio/barbaad.mp3",
+      src: "/audio/barbaad.mp3?v=2",
       title: "Barbaad",
       subtitle: "sung by me, only for you",
       kicker: "remember reason #12? i heard you.",
@@ -386,7 +386,7 @@ export const content = {
     ] as string[],
     // Wired ahead of the file. AudioNote hides itself until /audio/letter.mp3
     // actually exists, so dropping the file in is the only step needed.
-    voiceSrc: "/audio/letter.mp3" as string | undefined,
+    voiceSrc: "/audio/letter.mp3?v=2" as string | undefined,
   },
 
   finale: {
