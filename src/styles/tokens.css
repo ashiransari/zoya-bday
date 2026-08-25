@@ -970,11 +970,15 @@ button {
 .finale-counter {
   margin: 14px 0 8px;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(31px, 8.4vw, 54px);
+  /* One line, always. Below 768px the seconds are hidden so the string is
+     shorter and can run larger; above, the full string needs the tighter
+     scale. Both sized against Playfair italic at ~0.52em per character. */
+  font-size: clamp(20px, 5.5vw, 34px);
   font-style: italic;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1.08;
+  white-space: nowrap;
 }
 
 .finale-seconds {
@@ -1116,6 +1120,10 @@ button {
 @media (min-width: 768px) {
   .finale-seconds {
     display: inline;
+  }
+
+  .finale-counter {
+    font-size: clamp(24px, 3.9vw, 42px);
   }
 }
 
