@@ -75,10 +75,26 @@ export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
     updateCountdown();
     const interval = window.setInterval(updateCountdown, LOCK_TIMING.tickMs);
 
+    // Phones throttle or freeze timers in a backgrounded tab, so if she leaves
+    // this open and comes back after midnight the interval alone can be late.
+    // Checking on return means it has already unlocked by the time she looks.
+    window.addEventListener("focus", updateCountdown);
+    document.addEventListener("visibilitychange", updateCountdown);
+
     return () => {
       window.clearInterval(interval);
+      window.removeEventListener("focus", updateCountdown);
+      document.removeEventListener("visibilitychange", updateCountdown);
     };
   }, [beginUnlock, targetTime]);
+
+  // The flash hands over on its animation callback. If that ever fails to
+  // fire, this makes sure she is not left staring at a white screen.
+  useEffect(() => {
+    if (!unlocking) return;
+    const failsafe = window.setTimeout(onUnlock, DUR.lockFlash * 1_000 + 400);
+    return () => window.clearTimeout(failsafe);
+  }, [unlocking, onUnlock]);
 
   return (
     <section className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-paper px-4 py-12 text-center">
