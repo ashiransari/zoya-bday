@@ -2254,3 +2254,31 @@ html {
 .vinyl-seek:active::-webkit-slider-thumb {
   cursor: grabbing;
 }
+
+.finale-takeover-close {
+  margin-top: 52px;
+  padding: 13px 30px;
+  color: rgb(250 243 231 / 0.82);
+  background: rgb(250 243 231 / 0.07);
+  border: 1px solid rgb(250 243 231 / 0.3);
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  font-family: "Caveat", cursive;
+  font-size: 23px;
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
+}
+
+.finale-takeover-close:hover {
+  color: var(--paper);
+  background: rgb(250 243 231 / 0.15);
+  border-color: rgb(250 243 231 / 0.55);
+}
+
+.finale-takeover-close:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}

@@ -129,6 +129,19 @@ export function S9_Finale() {
                   {line}
                 </motion.p>
               ))}
+
+              {/* Arrives well after the lines have landed, so it never
+                  competes with them for the last word. */}
+              <motion.button
+                type="button"
+                className="finale-takeover-close"
+                onClick={() => setTakeover(false)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: reducedMotion ? 0.3 : 3.2, duration: 0.8 }}
+              >
+                take me back
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
