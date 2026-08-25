@@ -2234,7 +2234,10 @@ html {
   border: 2px solid var(--paper);
   border-radius: 50%;
   box-shadow: 0 2px 6px rgb(43 27 18 / 0.28);
-  cursor: grab;
+  /* Inherited, not declared. The global cursor:none that hides the system
+     pointer only matches elements, so a cursor set directly on this
+     pseudo-element would show through next to the custom one. */
+  cursor: inherit;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -2247,12 +2250,7 @@ html {
   border: 2px solid var(--paper);
   border-radius: 50%;
   box-shadow: 0 2px 6px rgb(43 27 18 / 0.28);
-  cursor: grab;
-}
-
-.audio-note-seek:active::-webkit-slider-thumb,
-.vinyl-seek:active::-webkit-slider-thumb {
-  cursor: grabbing;
+  cursor: inherit;
 }
 
 .finale-takeover-close {
