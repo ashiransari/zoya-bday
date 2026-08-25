@@ -11,10 +11,19 @@ export type MicBlowStatus =
 const BLOW_RMS = 0.045;
 const BLOW_HOLD_MS = 260;
 
+/**
+ * She is standing there blowing at her phone either way, so the candles go out
+ * on this timer even if the microphone never reports it. Real detection still
+ * runs and usually wins, which lands the moment on her actual breath. This is
+ * only the safety net underneath it.
+ */
+const ASSUME_BLOWN_MS = 4_200;
+
 export function useMicBlow(onBlow: () => void) {
   const [status, setStatus] = useState<MicBlowStatus>("idle");
   const [level, setLevel] = useState(0);
   const animationFrameRef = useRef<number>();
+  const assumeTimerRef = useRef<number>();
   const audioContextRef = useRef<AudioContext>();
   const streamRef = useRef<MediaStream>();
   const startingRef = useRef(false);
@@ -27,6 +36,11 @@ export function useMicBlow(onBlow: () => void) {
     if (animationFrameRef.current !== undefined) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = undefined;
+    }
+
+    if (assumeTimerRef.current !== undefined) {
+      window.clearTimeout(assumeTimerRef.current);
+      assumeTimerRef.current = undefined;
     }
 
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -102,6 +116,8 @@ export function useMicBlow(onBlow: () => void) {
       source.connect(analyser);
 
       setStatus("listening");
+
+      assumeTimerRef.current = window.setTimeout(trigger, ASSUME_BLOWN_MS);
 
       let since: number | null = null;
       let lastPaint = 0;

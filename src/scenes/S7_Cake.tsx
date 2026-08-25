@@ -45,13 +45,9 @@ function BlowControls({ onBlow }: BlowControlsProps) {
       return;
     }
 
-    if (status !== "listening") return;
-
-    const timer = window.setTimeout(
-      () => setFallbackVisible(true),
-      CAKE_TIMING.fallbackDelayMs,
-    );
-    return () => window.clearTimeout(timer);
+    // While listening, the candles are guaranteed to go out on their own, so
+    // offering a tap button here would only flash on screen and then vanish.
+    // The fallback is for when the microphone was refused or is unavailable.
   }, [status]);
 
   const handleTap = () => {
