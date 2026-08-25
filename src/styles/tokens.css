@@ -1944,3 +1944,28 @@ button {
 .music-slash {
   stroke-width: 2;
 }
+
+/* ── Story timeline thread ───────────────────────────────────────── */
+
+.story-thread {
+  /* Deepest at the top where she has already read, warming to gold at the
+     leading edge so the end of the line reads as the live one. */
+  background: linear-gradient(
+    180deg,
+    rgb(140 29 47 / 0.5) 0%,
+    rgb(140 29 47 / 0.72) 55%,
+    var(--gold) 100%
+  );
+}
+
+.story-dot {
+  display: block;
+  width: 13px;
+  height: 13px;
+  background: var(--cherry);
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgb(140 29 47 / 0.85),
+    0 0 0 5px rgb(201 162 39 / 0.14);
+}

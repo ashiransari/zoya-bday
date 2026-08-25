@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Polaroid } from "../components/Polaroid";
 import { Section } from "../components/Section";
 import { content, type Chapter } from "../content";
 import { TEDDY_TAP_EVENT } from "../effects/EasterEggs";
 import { useAppCtx } from "../lib/AppCtx";
-import { reducedMotion } from "../lib/motion";
+import { reducedMotion, SPRING } from "../lib/motion";
 import { seededRotation } from "../lib/seededRandom";
 
 function useDesktopLayout() {
@@ -138,6 +138,19 @@ function ArtifactNote({ chapter }: { chapter: Chapter }) {
 
 export function S3_StoryOfHer() {
   const { giftOpened } = useAppCtx();
+  const threadRef = useRef<HTMLDivElement>(null);
+
+  // The thread draws itself downward as she reads, reaching each dot as that
+  // chapter arrives rather than sitting there fully drawn from the start.
+  const { scrollYProgress } = useScroll({
+    target: threadRef,
+    offset: ["start 0.72", "end 0.62"],
+  });
+  const drawn = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    mass: 0.35,
+  });
 
   return (
     <section
@@ -155,10 +168,20 @@ export function S3_StoryOfHer() {
         </div>
       </Section>
 
-      <div className="relative mx-auto max-w-6xl">
+      <div ref={threadRef} className="relative mx-auto max-w-6xl">
+        {/* Faint full-length track, so the thread has something to run along. */}
         <div
           aria-hidden="true"
-          className="absolute bottom-12 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-cherry/20 md:block"
+          className="absolute bottom-12 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-cherry/12 md:block"
+        />
+        <motion.div
+          aria-hidden="true"
+          className="story-thread absolute bottom-12 left-1/2 top-4 hidden w-px -translate-x-1/2 md:block"
+          style={
+            reducedMotion
+              ? { scaleY: 1, transformOrigin: "top" }
+              : { scaleY: drawn, transformOrigin: "top" }
+          }
         />
 
         {content.chapters.map((chapter, index) => {
@@ -187,7 +210,19 @@ export function S3_StoryOfHer() {
                   aria-hidden="true"
                   className="hidden md:col-start-2 md:row-start-1 md:flex md:h-full md:items-center md:justify-center"
                 >
-                  <span className="h-3 w-3 rounded-full border-2 border-paper bg-cherry shadow-[0_0_0_1px_var(--cherry)]" />
+                  <motion.span
+                    className="story-dot"
+                    initial={
+                      reducedMotion
+                        ? { scale: 1, opacity: 1 }
+                        : { scale: 0.5, opacity: 0.45 }
+                    }
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-42% 0px -42% 0px" }}
+                    transition={
+                      reducedMotion ? { duration: 0.2 } : SPRING.settle
+                    }
+                  />
                 </div>
 
                 <div className={`order-2 ${copyPosition}`}>
