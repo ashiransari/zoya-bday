@@ -1,9 +1,12 @@
 import { Howl } from "howler";
 import { content } from "../content";
 
-const FULL_VOLUME = 0.55;
-const DUCKED_VOLUME = 0.12;
-const SWELL_VOLUME = 0.7;
+// The instrumental is normalised to -23 LUFS and sits well under the vinyl,
+// which plays at full. It should read as something beautiful happening in the
+// next room rather than anything competing for her attention.
+const FULL_VOLUME = 0.38;
+const DUCKED_VOLUME = 0.09;
+const SWELL_VOLUME = 0.55;
 const FADE_IN_MS = 2_000;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
