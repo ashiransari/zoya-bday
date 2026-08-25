@@ -6,7 +6,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { content } from "../content";
 import { audio } from "../lib/audio";
 import { mega } from "../lib/confetti";
@@ -32,11 +32,10 @@ interface BlowControlsProps {
 
 function BlowControls({ onBlow }: BlowControlsProps) {
   const { start, status, level } = useMicBlow(onBlow);
-  const [fallbackVisible, setFallbackVisible] = useState(
-    () =>
-      navigator.maxTouchPoints === 0 &&
-      window.matchMedia("(pointer: fine)").matches,
-  );
+  // Offer the microphone everywhere. Laptops have one too, and if it is
+  // refused or missing the denied/unsupported branch below drops straight
+  // to tapping.
+  const [fallbackVisible, setFallbackVisible] = useState(false);
   const [tapCount, setTapCount] = useState(0);
 
   useEffect(() => {
@@ -116,7 +115,6 @@ function chunkCandles(count: number) {
 
 export function S7_Cake() {
   const sceneRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sceneRef, { once: true, margin: "-35%" });
   const [phase, setPhase] = useState<CakePhase>("ready");
   const blowingRef = useRef(false);
   const timersRef = useRef<number[]>([]);
@@ -124,10 +122,6 @@ export function S7_Cake() {
     () => chunkCandles(content.her.turningAge),
     [],
   );
-
-  useEffect(() => {
-    if (isInView) audio.duck();
-  }, [isInView]);
 
   useEffect(
     () => () => {
@@ -157,7 +151,6 @@ export function S7_Cake() {
     schedule(() => setPhase("wish"), wishAt);
     schedule(() => {
       setPhase("celebrated");
-      audio.restore();
       audio.swell();
       if (!reducedMotion) mega();
     }, celebrateAt);

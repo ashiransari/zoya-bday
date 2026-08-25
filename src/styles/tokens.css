@@ -1931,3 +1931,8 @@ button {
   margin-top: 14px;
   accent-color: var(--cherry);
 }
+
+.music-note {
+  font-size: 20px;
+  line-height: 1;
+}

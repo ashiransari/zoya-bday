@@ -32,9 +32,8 @@ export function MusicToggle() {
               : SPRING.settle
           }
         >
-          <span className="cassette-window" aria-hidden="true">
-            <span />
-            <span />
+          <span className="music-note" aria-hidden="true">
+            {muted ? "🔇" : "🎵"}
           </span>
           <span className="sr-only">{muted ? "Music is muted" : "Music is playing"}</span>
         </motion.button>
