@@ -1,20 +1,22 @@
-import { Howl } from "howler";
 import { content } from "../content";
 
-// The file ships exactly as he supplied it, so these read the way a volume
-// slider does in any editor: 0.3 is his track at 30 percent. Nothing is
-// pre-attenuated, which means changing this number changes what she hears by
-// exactly that much.
-const FULL_VOLUME = 0.1;
-const DUCKED_VOLUME = 0.03;
-const SWELL_VOLUME = 0.16;
-const SWELL_UP_MS = 180;
-const SWELL_HOLD_MS = 220;
-const SWELL_DOWN_MS = 450;
+/**
+ * The background song, on a plain audio element.
+ *
+ * This used Howler, and its volume calls were not reaching the underlying
+ * node: the song played at full level even with every volume constant set to
+ * zero. There is nothing here that needs a library, so the element is driven
+ * directly and `element.volume` is the only thing standing between the file
+ * and the speakers.
+ *
+ * The value below is a straight multiplier on his file, exactly like a volume
+ * slider in an editor.
+ */
+const FULL_VOLUME = 0.25;
+const DUCKED_VOLUME = 0.08;
+const SWELL_VOLUME = 0.38;
+const SWELL_HOLD_MS = 400;
 
-// The hero song is optional until its file lands. Everything below degrades
-// to silence rather than erroring, and `subscribe` lets the toggle hide itself
-// so she never meets a button that does nothing.
 let available = true;
 const listeners = new Set<() => void>();
 
@@ -22,20 +24,15 @@ function notify() {
   listeners.forEach((listener) => listener());
 }
 
-function markUnavailable() {
+const song = new Audio(content.music.heroSong.src);
+song.loop = true;
+song.preload = "metadata";
+song.volume = FULL_VOLUME;
+
+song.addEventListener("error", () => {
   if (!available) return;
   available = false;
   notify();
-}
-
-const music = new Howl({
-  src: [content.music.heroSong.src],
-  loop: true,
-  html5: true,
-  preload: "metadata",
-  volume: 0,
-  onloaderror: markUnavailable,
-  onplayerror: markUnavailable,
 });
 
 function isAvailable() {
@@ -48,82 +45,61 @@ function subscribe(listener: () => void) {
 }
 
 let started = false;
-let soundId: number | undefined;
-let muted = false;
+let suspended = false;
 let swellTimer: number | undefined;
 
-function start() {
-  if (started || !available) {
-    return;
-  }
+function setVolume(value: number) {
+  // Guard the range: an out-of-bounds assignment throws and would leave the
+  // element at whatever it was last set to.
+  song.volume = Math.min(1, Math.max(0, value));
+}
 
+function start() {
+  if (started || !available) return;
   started = true;
-  // No code-side fade. The gentle entrance is baked into the file itself,
-  // and fading a just-queued html5 sound races its pending playback. On a
-  // slow load the fade finished before playback began and the song stayed
-  // at volume zero until the next explicit volume write.
-  music.volume(FULL_VOLUME);
-  soundId = music.play();
-  music.volume(FULL_VOLUME, soundId);
+  setVolume(FULL_VOLUME);
+  void song.play().catch(() => {
+    available = false;
+    notify();
+  });
 }
 
 function duck() {
-  if (soundId !== undefined) {
-    music.volume(DUCKED_VOLUME, soundId);
-  }
+  setVolume(DUCKED_VOLUME);
 }
 
 function restore() {
-  if (soundId !== undefined) {
-    // Eased, not snapped. After minutes at a whisper a jump to full reads
-    // as a jolt.
-    const current = music.volume() as number;
-    music.fade(current, FULL_VOLUME, 1_500, soundId);
-  }
+  setVolume(FULL_VOLUME);
 }
 
 function swell() {
-  if (soundId === undefined) {
-    return;
-  }
-
-  if (swellTimer !== undefined) {
-    window.clearTimeout(swellTimer);
-  }
-
-  const currentVolume = music.volume() as number;
-  music.fade(currentVolume, SWELL_VOLUME, SWELL_UP_MS, soundId);
+  if (!started) return;
+  if (swellTimer !== undefined) window.clearTimeout(swellTimer);
+  setVolume(SWELL_VOLUME);
   swellTimer = window.setTimeout(() => {
-    if (soundId !== undefined) {
-      music.fade(SWELL_VOLUME, FULL_VOLUME, SWELL_DOWN_MS, soundId);
-    }
+    setVolume(FULL_VOLUME);
     swellTimer = undefined;
-  }, SWELL_UP_MS + SWELL_HOLD_MS);
+  }, SWELL_HOLD_MS);
 }
 
-let suspended = false;
-
-// The vinyl takes the floor entirely. Not a duck. The hero song pauses and
-// picks back up from the same spot once the record stops.
+/** The vinyl and the letter recording take the floor outright, not a duck. */
 function suspend() {
-  if (started && soundId !== undefined && music.playing(soundId)) {
-    music.pause(soundId);
+  if (started && !song.paused) {
+    song.pause();
     suspended = true;
   }
 }
 
 function resume() {
-  if (suspended && soundId !== undefined) {
-    suspended = false;
-    music.play(soundId);
-    music.volume(FULL_VOLUME, soundId);
-  }
+  if (!suspended) return;
+  suspended = false;
+  setVolume(FULL_VOLUME);
+  void song.play().catch(() => {});
 }
 
 function toggleMute() {
-  muted = !muted;
-  music.mute(muted, soundId);
-  return muted;
+  song.muted = !song.muted;
+  return song.muted;
 }
 
 export const audio = {
