@@ -1457,10 +1457,12 @@ button {
   }
 }
 
-.heart-cursor-active,
-.heart-cursor-active * {
-  cursor: none !important;
-}
+/*
+ * The sparkle trail and the little heart ride alongside the real cursor now.
+ * Hiding the system cursor took every affordance with it: no pointer on
+ * buttons, no grab hand on the polaroids, no handle on the audio scrubbers.
+ * Charm is not worth making the site harder to use.
+ */
 
 .heart-cursor-canvas,
 .heart-cursor-heart {
@@ -2128,4 +2130,64 @@ html {
 .headphone-confirm:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 3px;
+}
+
+/* ── Audio scrubbers ─────────────────────────────────────────────── */
+
+/*
+ * Range inputs render a hairline track and a tiny thumb by default, which is
+ * fiddly to grab with a mouse. These give both scrubbers a visible rail and a
+ * thumb big enough to catch, drawn in the same cherry as everything else.
+ */
+.audio-note-seek,
+.vinyl-seek {
+  height: 22px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.audio-note-seek::-webkit-slider-runnable-track,
+.vinyl-seek::-webkit-slider-runnable-track {
+  height: 5px;
+  background: rgb(140 29 47 / 0.2);
+  border-radius: 999px;
+}
+
+.audio-note-seek::-moz-range-track,
+.vinyl-seek::-moz-range-track {
+  height: 5px;
+  background: rgb(140 29 47 / 0.2);
+  border-radius: 999px;
+}
+
+.audio-note-seek::-webkit-slider-thumb,
+.vinyl-seek::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  margin-top: -5.5px;
+  background: var(--cherry);
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(43 27 18 / 0.28);
+  cursor: grab;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.audio-note-seek::-moz-range-thumb,
+.vinyl-seek::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--cherry);
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(43 27 18 / 0.28);
+  cursor: grab;
+}
+
+.audio-note-seek:active::-webkit-slider-thumb,
+.vinyl-seek:active::-webkit-slider-thumb {
+  cursor: grabbing;
 }

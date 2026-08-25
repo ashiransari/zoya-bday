@@ -82,6 +82,7 @@ export function Polaroid({
                   className="absolute inset-0 h-full w-full object-cover"
                   src={src}
                   alt={alt}
+                  draggable={false}
                   width={portrait ? "900" : "1200"}
                   height={portrait ? "1200" : "900"}
                   loading="lazy"

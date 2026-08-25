@@ -153,10 +153,10 @@ export function S4_PolaroidWall() {
             The Polaroid Wall
           </h2>
           <p className="mt-4 font-handwriting text-xl text-ink/65 md:hidden">
-            swipe · tap to flip
+            swipe. tap one to read the back.
           </p>
           <p className="mt-4 hidden font-handwriting text-2xl text-ink/65 md:block">
-            go on, move them around →
+            tap one to read what&apos;s on the back. drag them around, too.
           </p>
         </div>
       </Section>
