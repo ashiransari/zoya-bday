@@ -50,51 +50,45 @@ export function AudioNote({ src }: AudioNoteProps) {
       onload: () => setDuration(sound.duration()),
       onplay: () => {
         setPlaying(true);
-        // A fresh listen restarts the song from the top so the two begin
-        // together. Resuming mid-letter just settles the bed back down low
-        // without yanking the instrumental back to its intro.
-        const seek = sound.seek();
-        if (typeof seek === "number" && seek < 1) {
-          audio.restartBed();
-        } else {
-          audio.duck();
-        }
+        // The recording carries its own backing music, so the site's song
+        // stops rather than ducking. Two instrumentals at once would fight.
+        audio.suspend();
         stopTracking();
         frameRef.current = window.requestAnimationFrame(track);
       },
       onpause: () => {
         setPlaying(false);
         stopTracking();
-        audio.restore();
+        audio.resume();
       },
       onstop: () => {
         setPlaying(false);
         stopTracking();
-        audio.restore();
+        audio.resume();
       },
       onend: () => {
         setPlaying(false);
         setPosition(0);
         stopTracking();
-        audio.restore();
+        audio.resume();
       },
       onloaderror: () => {
         // A missing or broken file should leave no dead control behind.
         setFailed(true);
         setPlaying(false);
-        audio.restore();
+        audio.resume();
       },
       onplayerror: () => {
         setFailed(true);
         setPlaying(false);
-        audio.restore();
+        audio.resume();
       },
     });
 
     soundRef.current = sound;
     return () => {
       stopTracking();
-      if (sound.playing()) audio.restore();
+      if (sound.playing()) audio.resume();
       sound.unload();
       soundRef.current = undefined;
     };

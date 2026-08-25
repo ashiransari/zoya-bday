@@ -72,22 +72,6 @@ function duck() {
   }
 }
 
-/**
- * The letter reading runs about fifteen minutes with the song looping
- * quietly underneath the whole way. Restart the song from the top so the
- * two begin together, and hold it at the ducked level so his voice stays
- * the only thing asking for her attention.
- */
-function restartBed() {
-  if (!available || !started || soundId === undefined) return;
-  music.seek(0, soundId);
-  if (!music.playing(soundId)) {
-    suspended = false;
-    music.play(soundId);
-  }
-  music.volume(DUCKED_VOLUME, soundId);
-}
-
 function restore() {
   if (soundId !== undefined) {
     // Eased, not snapped. After minutes at a whisper a jump to full reads
@@ -144,7 +128,6 @@ function toggleMute() {
 export const audio = {
   start,
   duck,
-  restartBed,
   restore,
   swell,
   suspend,
