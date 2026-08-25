@@ -7,7 +7,6 @@ import { content } from "../content";
 const FULL_VOLUME = 0.5;
 const DUCKED_VOLUME = 0.14;
 const SWELL_VOLUME = 0.75;
-const FADE_IN_MS = 2_000;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
 const SWELL_DOWN_MS = 450;
@@ -58,9 +57,13 @@ function start() {
   }
 
   started = true;
+  // No code-side fade. The gentle entrance is baked into the file itself,
+  // and fading a just-queued html5 sound races its pending playback. On a
+  // slow load the fade finished before playback began and the song stayed
+  // at volume zero until the next explicit volume write.
+  music.volume(FULL_VOLUME);
   soundId = music.play();
-  music.volume(0, soundId);
-  music.fade(0, FULL_VOLUME, FADE_IN_MS, soundId);
+  music.volume(FULL_VOLUME, soundId);
 }
 
 function duck() {
