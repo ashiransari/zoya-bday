@@ -32,9 +32,21 @@ export function MusicToggle() {
               : SPRING.settle
           }
         >
-          <span className="music-note" aria-hidden="true">
-            {muted ? "🔇" : "🎵"}
-          </span>
+          <svg
+            className="music-note"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M9 17.5V6.2l9-2v11.1" />
+            <circle cx="6.6" cy="17.6" r="2.4" />
+            <circle cx="15.6" cy="15.3" r="2.4" />
+            {muted && <line className="music-slash" x1="3.6" y1="20.6" x2="20.4" y2="3.4" />}
+          </svg>
           <span className="sr-only">{muted ? "Music is muted" : "Music is playing"}</span>
         </motion.button>
       ) : null}

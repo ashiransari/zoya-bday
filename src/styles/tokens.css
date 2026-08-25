@@ -1933,6 +1933,14 @@ button {
 }
 
 .music-note {
-  font-size: 20px;
-  line-height: 1;
+  width: 23px;
+  height: 23px;
+  /* Inherits the button's paper colour, so it reads as drawn in the same
+     ink as everything else rather than pasted on. */
+  color: currentColor;
+}
+
+/* Drawn slightly heavier than the note so the muted state is unmistakable. */
+.music-slash {
+  stroke-width: 2;
 }
