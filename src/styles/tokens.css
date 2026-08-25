@@ -1969,3 +1969,72 @@ button {
     0 0 0 1px rgb(140 29 47 / 0.85),
     0 0 0 5px rgb(201 162 39 / 0.14);
 }
+
+/* ── Scrollbars ──────────────────────────────────────────────────── */
+
+/*
+ * The default grey bar reads as browser chrome sitting on top of the paper.
+ * These are drawn from the same palette so the page keeps its edges: a track
+ * tinted like the paper itself and a cherry thumb, slim enough to stay out of
+ * the way. Firefox gets the two-value form, Chrome and Safari the ::-webkit
+ * rules, and any browser supporting neither simply keeps its own.
+ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(140 29 47 / 0.45) rgb(140 29 47 / 0.07);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(140 29 47 / 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(140 29 47 / 0.38);
+  /* Inset border leaves paper showing either side, so the thumb reads as a
+     slim stroke rather than a bar filling the gutter. */
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(140 29 47 / 0.62);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* The opened letter sits on darker paper, so its own bar is tuned to that. */
+.open-when-note {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(140 29 47 / 0.4) transparent;
+}
+
+.open-when-note::-webkit-scrollbar {
+  width: 8px;
+}
+
+.open-when-note::-webkit-scrollbar-track {
+  margin: 12px 0;
+  background: transparent;
+}
+
+.open-when-note::-webkit-scrollbar-thumb {
+  background: rgb(140 29 47 / 0.32);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+.open-when-note::-webkit-scrollbar-thumb:hover {
+  background: rgb(140 29 47 / 0.55);
+  background-clip: content-box;
+}
