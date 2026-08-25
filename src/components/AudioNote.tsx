@@ -50,8 +50,15 @@ export function AudioNote({ src }: AudioNoteProps) {
       onload: () => setDuration(sound.duration()),
       onplay: () => {
         setPlaying(true);
-        // The song restarts from the top and stays low for the whole reading.
-        audio.restartBed();
+        // A fresh listen restarts the song from the top so the two begin
+        // together. Resuming mid-letter just settles the bed back down low
+        // without yanking the instrumental back to its intro.
+        const seek = sound.seek();
+        if (typeof seek === "number" && seek < 1) {
+          audio.restartBed();
+        } else {
+          audio.duck();
+        }
         stopTracking();
         frameRef.current = window.requestAnimationFrame(track);
       },
