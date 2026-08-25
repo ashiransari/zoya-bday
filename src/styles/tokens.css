@@ -107,6 +107,9 @@ button {
 .polaroid-back {
   position: absolute;
   inset: 0;
+  /* A note that still cannot fit clips at the frame instead of floating
+     over the board. */
+  overflow: hidden;
 }
 
 .polaroid-surface {

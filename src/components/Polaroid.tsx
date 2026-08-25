@@ -110,11 +110,23 @@ export function Polaroid({
             aria-hidden={!flipped}
           >
             <div className="polaroid-surface polaroid-back-paper">
-              <p className="font-handwriting text-[clamp(1.35rem,3vw,1.75rem)] leading-snug text-ink/80">
+              {/* Landscape faces are much shorter, so long notes need smaller
+                  type to stay inside the frame. */}
+              <p
+                className={`font-handwriting leading-snug text-ink/80 ${
+                  portrait
+                    ? "text-[clamp(1.35rem,3vw,1.75rem)]"
+                    : "text-[clamp(1rem,2.3vw,1.3rem)]"
+                }`}
+              >
                 {backNote}
               </p>
               {signature ? (
-                <p className="mt-5 text-right font-handwriting text-lg text-cherry">
+                <p
+                  className={`text-right font-handwriting text-cherry ${
+                    portrait ? "mt-5 text-lg" : "mt-2 text-base"
+                  }`}
+                >
                   — {signature}
                 </p>
               ) : null}
