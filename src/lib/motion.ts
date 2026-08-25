@@ -59,7 +59,7 @@ export const CAKE_TIMING = {
   flameOut: 0.18,
   smoke: 0.3,
   blackout: 0.4,
-  fallbackDelayMs: 6_000,
+  fallbackDelayMs: 4_000,
   fallbackTaps: 3,
   flicker: 0.6,
   reducedFade: 0.2,

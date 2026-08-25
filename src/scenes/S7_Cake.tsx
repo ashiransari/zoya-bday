@@ -31,7 +31,7 @@ interface BlowControlsProps {
 }
 
 function BlowControls({ onBlow }: BlowControlsProps) {
-  const { start, status } = useMicBlow(onBlow);
+  const { start, status, level } = useMicBlow(onBlow);
   const [fallbackVisible, setFallbackVisible] = useState(
     () =>
       navigator.maxTouchPoints === 0 &&
@@ -88,9 +88,19 @@ function BlowControls({ onBlow }: BlowControlsProps) {
           use my microphone
         </button>
       ) : status === "listening" ? (
-        <p className="cake-listening" role="status">
-          listening… take a breath and blow
-        </p>
+        <div className="cake-listening-wrap">
+          <p className="cake-listening" role="status">
+            listening… take a breath and blow
+          </p>
+          {/* Shows her the mic is actually hearing something, and tells us
+              whether a failure is detection or permission. */}
+          <span className="cake-level" aria-hidden="true">
+            <span
+              className="cake-level-fill"
+              style={{ transform: `scaleX(${Math.max(0.02, level)})` }}
+            />
+          </span>
+        </div>
       ) : null}
     </div>
   );
