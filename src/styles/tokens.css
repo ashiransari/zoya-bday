@@ -1867,3 +1867,56 @@ button {
   transform-origin: left center;
   transition: transform 0.09s linear;
 }
+
+/* ── Letter voice player ─────────────────────────────────────────── */
+
+.audio-note-player {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 32px;
+}
+
+.audio-note-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* The base .audio-note button keeps its pill styling; kill its old margin
+   now that the player wrapper owns spacing. */
+.audio-note-player .audio-note {
+  margin: 0;
+}
+
+.audio-note-speed {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--cherry);
+  background: transparent;
+  border: 1px dashed rgb(140 29 47 / 0.4);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Courier Prime", monospace;
+  font-size: 14px;
+}
+
+.audio-note-speed:focus-visible,
+.audio-note-seek:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.audio-note-time {
+  color: rgb(43 27 18 / 0.55);
+  font-family: "Courier Prime", monospace;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.audio-note-seek {
+  width: min(100%, 340px);
+  margin-top: 14px;
+  accent-color: var(--cherry);
+}
