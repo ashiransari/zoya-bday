@@ -50,7 +50,7 @@ export const content = {
     ],
   },
   music: {
-    heroSong: { src: "/audio/our-song.mp3?v=3", title: "Song by Artist" },
+    heroSong: { src: "/audio/our-song.mp3?v=4", title: "Song by Artist" },
     vinyl: {
       src: "/audio/barbaad.mp3?v=2",
       title: "Barbaad",
