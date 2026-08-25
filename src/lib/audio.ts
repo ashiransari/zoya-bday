@@ -9,13 +9,40 @@ const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
 const SWELL_DOWN_MS = 450;
 
+// The hero song is optional until its file lands. Everything below degrades
+// to silence rather than erroring, and `subscribe` lets the toggle hide itself
+// so she never meets a button that does nothing.
+let available = true;
+const listeners = new Set<() => void>();
+
+function notify() {
+  listeners.forEach((listener) => listener());
+}
+
+function markUnavailable() {
+  if (!available) return;
+  available = false;
+  notify();
+}
+
 const music = new Howl({
   src: [content.music.heroSong.src],
   loop: true,
   html5: true,
   preload: "metadata",
   volume: 0,
+  onloaderror: markUnavailable,
+  onplayerror: markUnavailable,
 });
+
+function isAvailable() {
+  return available;
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
 
 let started = false;
 let soundId: number | undefined;
@@ -23,7 +50,7 @@ let muted = false;
 let swellTimer: number | undefined;
 
 function start() {
-  if (started) {
+  if (started || !available) {
     return;
   }
 
@@ -89,4 +116,14 @@ function toggleMute() {
   return muted;
 }
 
-export const audio = { start, duck, restore, swell, suspend, resume, toggleMute };
+export const audio = {
+  start,
+  duck,
+  restore,
+  swell,
+  suspend,
+  resume,
+  toggleMute,
+  isAvailable,
+  subscribe,
+};

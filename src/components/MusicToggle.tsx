@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSyncExternalStore, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { content } from "../content";
 import { audio } from "../lib/audio";
@@ -8,6 +8,7 @@ import { GIFT_TIMING, reducedMotion, SPRING } from "../lib/motion";
 export function MusicToggle() {
   const { giftOpened } = useAppCtx();
   const [muted, setMuted] = useState(false);
+  const hasSong = useSyncExternalStore(audio.subscribe, audio.isAvailable);
 
   function handleToggle() {
     setMuted(audio.toggleMute());
@@ -15,7 +16,7 @@ export function MusicToggle() {
 
   return (
     <AnimatePresence>
-      {giftOpened ? (
+      {giftOpened && hasSong ? (
         <motion.button
           type="button"
           className="music-toggle"

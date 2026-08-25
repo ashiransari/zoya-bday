@@ -3,7 +3,7 @@ import { Howl } from "howler";
 import { audio } from "../lib/audio";
 
 interface AudioNoteProps {
-  /** Undefined until the recording is added — the button still shows, inert. */
+  /** Points at the recording. The button hides itself until that file exists. */
   src?: string;
 }
 
@@ -56,7 +56,7 @@ export function AudioNote({ src }: AudioNoteProps) {
     };
   }, [src]);
 
-  if (src && failed) return null;
+  if (!src || failed) return null;
 
   const toggle = () => {
     const sound = soundRef.current;

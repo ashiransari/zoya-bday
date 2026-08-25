@@ -384,8 +384,9 @@ export const content = {
       "Happy Birthday Zoya. ❤️",
       "Always you.",
     ] as string[],
-    // Set to "/audio/letter.mp3" when the recording arrives.
-    voiceSrc: undefined as string | undefined,
+    // Wired ahead of the file. AudioNote hides itself until /audio/letter.mp3
+    // actually exists, so dropping the file in is the only step needed.
+    voiceSrc: "/audio/letter.mp3" as string | undefined,
   },
 
   finale: {
