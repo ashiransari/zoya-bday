@@ -223,7 +223,7 @@ export function S2_GiftBox() {
         </motion.p>
 
         <motion.p
-          className="age-outline -my-2 font-display text-age leading-none"
+          className="age-outline -mt-1 mb-[0.14em] font-display text-age leading-none"
           variants={{
             hidden: reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.78 },
             visible: {
