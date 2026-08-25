@@ -691,7 +691,6 @@ button {
 .letter-envelope:focus-visible,
 .letter-skip:focus-visible,
 .audio-note:focus-visible,
-.finale-gift-tag:focus-visible,
 .finale-button:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 4px;
@@ -1027,49 +1026,6 @@ button {
   margin-top: 4px;
   border: 1.5px solid var(--cherry);
   border-radius: 2px;
-}
-
-.finale-gift-tag {
-  width: min(100%, 360px);
-  min-height: 108px;
-  margin: 0 0 32px;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  perspective: 1000px;
-}
-
-.finale-gift-inner {
-  position: relative;
-  display: block;
-  width: 100%;
-  min-height: 108px;
-  transform-style: preserve-3d;
-}
-
-.finale-gift-face {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: var(--paper-deep);
-  border: 1px solid rgb(140 29 47 / 0.22);
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgb(43 27 18 / 0.13);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  font-family: "Caveat", cursive;
-  font-size: 22px;
-}
-
-.finale-gift-front {
-  color: var(--cherry);
-}
-
-.finale-gift-back {
-  transform: rotateY(180deg);
 }
 
 .finale-button {

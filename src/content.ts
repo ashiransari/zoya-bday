@@ -388,8 +388,6 @@ export const content = {
     voiceSrc: undefined as string | undefined,
   },
 
-  giftClue: undefined as { riddle: string } | undefined,
-
   finale: {
     line1: "Happy birthday, Baby.",
     line2: "I love you. Today, tomorrow, always.",

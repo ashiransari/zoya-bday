@@ -16,9 +16,7 @@ const TAKEOVER_HEARTS = 24;
 
 export function S9_Finale() {
   const elapsed = useCountUp(content.us.startedISO);
-  const [giftFlipped, setGiftFlipped] = useState(false);
   const [takeover, setTakeover] = useState(false);
-  const giftClue = content.giftClue;
   const birthdayLabel = useMemo(
     () =>
       new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(
@@ -68,45 +66,6 @@ export function S9_Finale() {
             ))}
           </ul>
         </div>
-
-        {giftClue && (
-          <button
-            type="button"
-            className="finale-gift-tag"
-            aria-label={giftFlipped ? "Hide the gift clue" : "Reveal the gift clue"}
-            aria-pressed={giftFlipped}
-            onClick={() => setGiftFlipped((current) => !current)}
-          >
-            <motion.span
-              className="finale-gift-inner"
-              animate={
-                reducedMotion
-                  ? { opacity: 1 }
-                  : { rotateY: giftFlipped ? 180 : 0 }
-              }
-              transition={
-                reducedMotion
-                  ? { duration: FINALE_TIMING.reducedFade }
-                  : { duration: DUR.flip, ease: EASE.inOut }
-              }
-            >
-              {reducedMotion ? (
-                <span className="finale-gift-face finale-gift-front">
-                  {giftFlipped ? giftClue.riddle : "one more thing… 🎁"}
-                </span>
-              ) : (
-                <>
-                  <span className="finale-gift-face finale-gift-front">
-                    one more thing… 🎁
-                  </span>
-                  <span className="finale-gift-face finale-gift-back">
-                    {giftClue.riddle}
-                  </span>
-                </>
-              )}
-            </motion.span>
-          </button>
-        )}
 
         <button type="button" className="finale-button" onClick={revealFinale}>
           one last thing
