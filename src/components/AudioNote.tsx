@@ -21,7 +21,7 @@ export function AudioNote({ src }: AudioNoteProps) {
       preload: "metadata",
       onplay: () => {
         setPlaying(true);
-        audio.duck();
+        audio.restartBed();
       },
       onpause: () => {
         setPlaying(false);
