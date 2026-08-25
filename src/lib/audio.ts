@@ -1,12 +1,12 @@
 import { Howl } from "howler";
 import { content } from "../content";
 
-// The instrumental is normalised to -23 LUFS, which already makes it a
-// background bed. These gains stack on top of that, so anything much lower
-// vanishes entirely on a phone speaker.
-const FULL_VOLUME = 0.65;
-const DUCKED_VOLUME = 0.18;
-const SWELL_VOLUME = 0.9;
+// The instrumental ships at -16.5 LUFS, streaming-normal loudness, and the
+// quiet-background feel comes from this gain alone. Phone speakers eat
+// anything subtler than this.
+const FULL_VOLUME = 0.5;
+const DUCKED_VOLUME = 0.14;
+const SWELL_VOLUME = 0.75;
 const FADE_IN_MS = 2_000;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
