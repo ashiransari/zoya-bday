@@ -151,7 +151,6 @@ export function S7_Cake() {
     schedule(() => setPhase("wish"), wishAt);
     schedule(() => {
       setPhase("celebrated");
-      audio.swell();
       if (!reducedMotion) mega();
     }, celebrateAt);
   }, [schedule]);

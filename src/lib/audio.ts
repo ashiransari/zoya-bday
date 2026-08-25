@@ -14,8 +14,6 @@ import { content } from "../content";
  */
 const FULL_VOLUME = 0.25;
 const DUCKED_VOLUME = 0.08;
-const SWELL_VOLUME = 0.38;
-const SWELL_HOLD_MS = 400;
 
 let available = true;
 const listeners = new Set<() => void>();
@@ -46,7 +44,6 @@ function subscribe(listener: () => void) {
 
 let started = false;
 let suspended = false;
-let swellTimer: number | undefined;
 
 function setVolume(value: number) {
   // Guard the range: an out-of-bounds assignment throws and would leave the
@@ -70,16 +67,6 @@ function duck() {
 
 function restore() {
   setVolume(FULL_VOLUME);
-}
-
-function swell() {
-  if (!started) return;
-  if (swellTimer !== undefined) window.clearTimeout(swellTimer);
-  setVolume(SWELL_VOLUME);
-  swellTimer = window.setTimeout(() => {
-    setVolume(FULL_VOLUME);
-    swellTimer = undefined;
-  }, SWELL_HOLD_MS);
 }
 
 /** The vinyl and the letter recording take the floor outright, not a duck. */
@@ -106,7 +93,6 @@ export const audio = {
   start,
   duck,
   restore,
-  swell,
   suspend,
   resume,
   toggleMute,
