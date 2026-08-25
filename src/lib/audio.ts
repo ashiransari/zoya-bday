@@ -4,9 +4,9 @@ import { content } from "../content";
 // Plain gain only. Compressing the range was a mistake: a track that never
 // gets quiet never recedes, and it read as louder than the same music left
 // alone. The original dynamics stay, and the level does the work.
-const FULL_VOLUME = 0.3;
-const DUCKED_VOLUME = 0.09;
-const SWELL_VOLUME = 0.46;
+const FULL_VOLUME = 0.12;
+const DUCKED_VOLUME = 0.04;
+const SWELL_VOLUME = 0.2;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
 const SWELL_DOWN_MS = 450;
