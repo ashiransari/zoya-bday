@@ -1,12 +1,13 @@
 import { Howl } from "howler";
 import { content } from "../content";
 
-// The instrumental ships at -16.5 LUFS, streaming-normal loudness, and the
-// quiet-background feel comes from this gain alone. Phone speakers eat
-// anything subtler than this.
-const FULL_VOLUME = 0.5;
-const DUCKED_VOLUME = 0.14;
-const SWELL_VOLUME = 0.75;
+// The instrumental ships at -20 LUFS with its dynamic range tightened to
+// about 7 LU, so it holds an even level instead of surging on the big
+// passages. Combined with this gain it lands near -28 LUFS in the room:
+// clearly there, never asking to be listened to.
+const FULL_VOLUME = 0.36;
+const DUCKED_VOLUME = 0.1;
+const SWELL_VOLUME = 0.55;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
 const SWELL_DOWN_MS = 450;
