@@ -37,14 +37,28 @@ function pad(value: number) {
   return String(value).padStart(2, "0");
 }
 
+/** How long she waits at zero before it takes her in on its own. */
+const AUTO_ENTER_SECONDS = 5;
+
 export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
   const targetTime = useMemo(
     () => Date.parse(content.her.birthdayISO),
     [],
   );
   const [countdown, setCountdown] = useState(() => getCountdown(targetTime));
+  const [arrived, setArrived] = useState(false);
+  const [secondsLeft, setSecondsLeft] = useState(AUTO_ENTER_SECONDS);
   const [unlocking, setUnlocking] = useState(false);
   const hasTriggered = useRef(false);
+  const hasEntered = useRef(false);
+
+  // Zero does not hand her straight over any more. She gets a moment, a count,
+  // and a way in of her own in case anything about the automatic step fails.
+  const enter = useCallback(() => {
+    if (hasEntered.current) return;
+    hasEntered.current = true;
+    setUnlocking(true);
+  }, []);
 
   const beginUnlock = useCallback(() => {
     if (hasTriggered.current) {
@@ -53,7 +67,7 @@ export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
 
     hasTriggered.current = true;
     setCountdown(EMPTY_COUNTDOWN);
-    setUnlocking(true);
+    setArrived(true);
 
     if (!reducedMotion) {
       micro();
@@ -88,6 +102,23 @@ export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
     };
   }, [beginUnlock, targetTime]);
 
+  useEffect(() => {
+    if (!arrived) return;
+
+    const tick = window.setInterval(() => {
+      setSecondsLeft((current) => {
+        if (current <= 1) {
+          window.clearInterval(tick);
+          enter();
+          return 0;
+        }
+        return current - 1;
+      });
+    }, 1_000);
+
+    return () => window.clearInterval(tick);
+  }, [arrived, enter]);
+
   // The flash hands over on its animation callback. If that ever fails to
   // fire, this makes sure she is not left staring at a white screen.
   useEffect(() => {
@@ -115,7 +146,9 @@ export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
         }
       >
         <p className="mb-7 font-handwriting text-2xl text-cherry">
-          patience, {content.her.nickname}… 🥱
+          {arrived
+            ? `it's midnight, ${content.her.nickname.toLowerCase()}.`
+            : `patience, ${content.her.nickname}… 🥱`}
         </p>
 
         <p
@@ -126,15 +159,32 @@ export function S1_MidnightLock({ onUnlock }: S1MidnightLockProps) {
           {pad(countdown.minutes)} : {pad(countdown.seconds)}
         </p>
 
-        <div
-          aria-hidden="true"
-          className="mt-4 grid grid-cols-4 gap-2 font-body text-[10px] uppercase tracking-[0.2em] text-ink/55 md:text-xs"
-        >
-          <span>days</span>
-          <span>hours</span>
-          <span>mins</span>
-          <span>secs</span>
-        </div>
+        {arrived ? (
+          <motion.div
+            className="lock-arrived"
+            initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p aria-live="polite">
+              taking you in
+              {secondsLeft > 0 ? ` in ${secondsLeft}…` : "…"}
+            </p>
+            <button type="button" onClick={enter}>
+              or tap here to go in now
+            </button>
+          </motion.div>
+        ) : (
+          <div
+            aria-hidden="true"
+            className="mt-4 grid grid-cols-4 gap-2 font-body text-[10px] uppercase tracking-[0.2em] text-ink/55 md:text-xs"
+          >
+            <span>days</span>
+            <span>hours</span>
+            <span>mins</span>
+            <span>secs</span>
+          </div>
+        )}
       </motion.div>
 
       <AnimatePresence>

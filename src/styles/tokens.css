@@ -2280,3 +2280,47 @@ html {
   outline: 3px solid var(--gold);
   outline-offset: 4px;
 }
+
+/* ── Midnight arrival ────────────────────────────────────────────── */
+
+.lock-arrived {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.lock-arrived p {
+  margin: 0;
+  color: rgb(43 27 18 / 0.6);
+  font-family: "Caveat", cursive;
+  font-size: clamp(20px, 5vw, 24px);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Underlined rather than a filled button. It is only there in case the
+   automatic step fails, so it should not look like the main event. */
+.lock-arrived button {
+  min-height: 44px;
+  margin-top: 10px;
+  padding: 0 8px;
+  color: var(--cherry);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: "Caveat", cursive;
+  font-size: clamp(21px, 5.2vw, 25px);
+  text-decoration: underline;
+  text-decoration-color: rgb(140 29 47 / 0.4);
+  text-underline-offset: 5px;
+  transition: color 0.2s ease;
+}
+
+.lock-arrived button:hover {
+  color: var(--cherry-bright);
+}
+
+.lock-arrived button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
