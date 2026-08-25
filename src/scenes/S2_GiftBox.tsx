@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { HeadphoneNote } from "../components/HeadphoneNote";
 import { content } from "../content";
 import { audio } from "../lib/audio";
+import { enterFullscreen } from "../lib/fullscreen";
 import { useAppCtx } from "../lib/AppCtx";
 import { micro, type ConfettiOrigin } from "../lib/confetti";
 import {
@@ -26,6 +28,7 @@ const BALLOONS = [
 export function S2_GiftBox() {
   const { setGiftOpened } = useAppCtx();
   const [phase, setPhase] = useState<GiftPhase>("closed");
+  const [headphonesAsked, setHeadphonesAsked] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const confettiOrigin = useRef<ConfettiOrigin>();
   const isOpening = phase !== "closed";
@@ -67,6 +70,9 @@ export function S2_GiftBox() {
       };
     }
 
+    // Gated on a gesture rather than a prompt, so this is the one moment we
+    // can ask. Laptops and Android take it; iOS quietly declines.
+    enterFullscreen();
     audio.start();
     setPhase("opening");
   }
@@ -104,6 +110,11 @@ export function S2_GiftBox() {
             />
           ))
         : null}
+
+      <HeadphoneNote
+        open={!headphonesAsked && phase === "closed"}
+        onDismiss={() => setHeadphonesAsked(true)}
+      />
 
       <motion.div
         ref={boxRef}
