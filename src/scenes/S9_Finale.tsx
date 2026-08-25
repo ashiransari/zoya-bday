@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { content } from "../content";
 import { mega } from "../lib/confetti";
@@ -17,13 +17,6 @@ const TAKEOVER_HEARTS = 24;
 export function S9_Finale() {
   const elapsed = useCountUp(content.us.startedISO);
   const [takeover, setTakeover] = useState(false);
-  const birthdayLabel = useMemo(
-    () =>
-      new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(
-        new Date(content.her.birthdayISO),
-      ),
-    [],
-  );
 
   const revealFinale = () => {
     if (takeover) return;
@@ -72,8 +65,8 @@ export function S9_Finale() {
         </button>
 
         <footer>
-          made with too much love and a questionable amount of code.{" "}
-          {content.you.name}, {birthdayLabel}
+          made with too much love and a questionable amount of coding hours,{" "}
+          — {content.you.name.charAt(0)}
         </footer>
       </motion.div>
 
