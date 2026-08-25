@@ -5,9 +5,9 @@ import { content } from "../content";
 // slider does in any editor: 0.3 is his track at 30 percent. Nothing is
 // pre-attenuated, which means changing this number changes what she hears by
 // exactly that much.
-const FULL_VOLUME = 0.3;
-const DUCKED_VOLUME = 0.09;
-const SWELL_VOLUME = 0.45;
+const FULL_VOLUME = 0.1;
+const DUCKED_VOLUME = 0.03;
+const SWELL_VOLUME = 0.16;
 const SWELL_UP_MS = 180;
 const SWELL_HOLD_MS = 220;
 const SWELL_DOWN_MS = 450;
