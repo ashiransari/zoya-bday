@@ -22,6 +22,14 @@ export function EasterEggs() {
   const tapHeartIdRef = useRef(0);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const portraitSecret = content.easterEggs.secretAspect === "portrait";
+
+  // The modal only mounts on the seventh tap, so without this the photo starts
+  // downloading at the exact moment she is waiting to see it. Fetch it quietly
+  // as soon as the eggs arm instead.
+  useEffect(() => {
+    const preload = new Image();
+    preload.src = content.easterEggs.secretPhoto;
+  }, []);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -178,7 +186,6 @@ export function EasterEggs() {
                     alt={`A secret memory with ${content.her.name}`}
                     width={portraitSecret ? "900" : "1200"}
                     height={portraitSecret ? "1200" : "900"}
-                    loading="lazy"
                     decoding="async"
                     onError={() => setSecretImageFailed(true)}
                   />

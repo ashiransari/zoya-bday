@@ -115,7 +115,7 @@ export function Polaroid({
               </p>
               {signature ? (
                 <p className="mt-5 text-right font-handwriting text-lg text-cherry">
-                  love, {signature}
+                  — {signature}
                 </p>
               ) : null}
             </div>
