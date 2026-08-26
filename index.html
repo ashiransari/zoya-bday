@@ -8,7 +8,15 @@
     <meta property="og:title" content="something for you 🤍" />
     <meta property="og:description" content="open me" />
     <meta name="theme-color" content="#FAF3E7" />
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- iOS ignores the manifest's display mode on older versions, so it gets
+         its own tags. Added to the home screen, the site opens without any
+         browser chrome, which is the only route to fullscreen on iPhone. -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="for you 🤍" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Caveat:wght@400;600&family=Courier+Prime&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
