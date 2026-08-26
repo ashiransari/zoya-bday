@@ -8,7 +8,10 @@
     <meta property="og:title" content="something for you 🤍" />
     <meta property="og:description" content="open me" />
     <meta name="theme-color" content="#FAF3E7" />
-    <link rel="icon" href="/icons/icon-192.png" />
+    <!-- SVG first for anything modern, PNGs behind it for everything else. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <!-- iOS ignores the manifest's display mode on older versions, so it gets
          its own tags. Added to the home screen, the site opens without any
